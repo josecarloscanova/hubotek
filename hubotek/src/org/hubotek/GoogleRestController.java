@@ -17,25 +17,15 @@ public class GoogleRestController {
 	private GoogleNewsFeed googleNewsFeed;
 	
 	@RequestMapping(name="/googleNews",method=RequestMethod.GET)
-	public RssDocument getGoogleNewsFeed(@RequestParam(value="lang", defaultValue="en_US") String lang) {
+	public RssDocument getGoogleNewsFeed(@RequestParam(value="lang", defaultValue="en_US") String lang , @RequestParam(value="num" , defaultValue="5") String count , @RequestParam(value="topic" , defaultValue="all") String topic , @RequestParam(value="query" , defaultValue="") String query , @RequestParam(value="output" , defaultValue="rss") String output) {
 		RssDocument document = null;
 		try {
-			 //TODO: a timeout manager.. here.
 			  document =  googleNewsFeed.requestNewsFeed(null).get();
 		} catch (InterruptedException | ExecutionException e) {
 			throw new HubotekException(e);
 		}
 		return document;
 	}
-	
-//	@GetMapping(path = "/hubotek1", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@RequestMapping("/hubotek1")
-//	@JsonView(BlogData.class)
-//	@ResponseBody
-//	public BlogData getBlogDataById(Model model)
-//	{
-//		return new BlogData(1000);
-//	}
 	
 	public GoogleNewsFeed getGoogleNewsFeed() {
 		return googleNewsFeed;

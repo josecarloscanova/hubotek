@@ -2,6 +2,12 @@
 * FeedEk jQuery RSS/ATOM Feed Plugin v3.0 with YQL API
 * http://jquery-plugins.net/FeedEk/FeedEk.html  https://github.com/enginkizil/FeedEk
 * Author : Engin KIZIL http://www.enginkizil.com   
+* 
+* Modified, excluded YQL API dependency... 
+* Altered URL for news. 
+* var YQLstr = 'SELECT channel.item FROM feednormalizer WHERE output="rss_2.0" AND url ="' + def.FeedUrl + '" LIMIT ' + def.MaxCount;
+* https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent(YQLstr) + "&format=json&diagnostics=false&callback=?
+* TODO: next version update for an arbitrary(configurable), URL. 
 */
 
 (function ($) {
@@ -13,7 +19,8 @@
             DescCharacterLimit: 0,
             TitleLinkTarget: "_blank",
             DateFormat: "",
-            DateFormatLang:"en"
+            DateFormatLang:"en",
+            RssHost: "http://localhost:8888/s_content/googleNews"
         }, opt);
         
         var id = $(this).attr("id"), i, s = "", dt;
@@ -21,21 +28,21 @@
         if (def.FeedUrl == undefined) return;       
         $("#" + id).append('<img src="images/loader1.gif" />');
 
-        var YQLstr = 'SELECT channel.item FROM feednormalizer WHERE output="rss_2.0" AND url ="' + def.FeedUrl + '" LIMIT ' + def.MaxCount;
-
         $.ajax({
-            url: "https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent(YQLstr) + "&format=json&diagnostics=false&callback=?",
+            url: def.RssHost,
             dataType: "json",
             success: function (data) {
                 $("#" + id).empty();
-                if (!(data.query.results.rss instanceof Array)) {
-                    data.query.results.rss = [data.query.results.rss];
+                var inc = 0;
+                if (data.rssItems instanceof Array && data.rssItems.length > def.MaxCount){
+                	data.rssItems = data.rssItems.slice(def.MaxCount-1);
                 }
-                $.each(data.query.results.rss, function (e, itm) {
-                    s += '<li><div class="itemTitle"><a href="' + itm.channel.item.link + '" target="' + def.TitleLinkTarget + '" >' + itm.channel.item.title + '</a></div>';
+                $.each(data.rssItems, function (e, itm) {
+                	inc++;
+                    s += '<li><div class="itemTitle"><a href="' + itm.link + '" target="' + def.TitleLinkTarget + '" >' + itm.title + '</a></div>';
                     
                     if (def.ShowPubDate){
-                        dt = new Date(itm.channel.item.pubDate);
+                        dt = new Date(itm.pubDate);
                         s += '<div class="itemDate">';
                         if ($.trim(def.DateFormat).length > 0) {
                             try {
@@ -51,11 +58,11 @@
                     }
                     if (def.ShowDesc) {
                         s += '<div class="itemContent">';
-                         if (def.DescCharacterLimit > 0 && itm.channel.item.description.length > def.DescCharacterLimit) {
-                            s += itm.channel.item.description.substring(0, def.DescCharacterLimit) + '...';
+                         if (def.DescCharacterLimit > 0 && itm.length > def.DescCharacterLimit) {
+                            s += itm.description.substring(0, def.DescCharacterLimit) + '...';
                         }
                         else {
-                            s += itm.channel.item.description;
+                            s += itm.description;
                          }
                          s += '</div>';
                     }
