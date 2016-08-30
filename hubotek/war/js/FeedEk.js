@@ -20,7 +20,7 @@
             TitleLinkTarget: "_blank",
             DateFormat: "",
             DateFormatLang:"en",
-            RssHost: "http://localhost:8888/s_content/googleNews"
+            RssHost: "https://hubotek.appspot.com/s_content/googleNews"
         }, opt);
         
         var id = $(this).attr("id"), i, s = "", dt;
