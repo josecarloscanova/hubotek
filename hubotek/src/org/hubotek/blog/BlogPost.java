@@ -53,6 +53,7 @@ public class BlogPost {
 	public void setEtag(String etag) {
 		this.etag = etag;
 	}
+	
 	public String getUrl() {
 		return url;
 	}

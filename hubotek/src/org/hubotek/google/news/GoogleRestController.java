@@ -21,7 +21,7 @@ public class GoogleRestController {
 		RssDocument document = null;
 		try {
 				GoogleNewsUrlBuilder googleUrlBuilder = new GoogleNewsUrlBuilder();
-				googleUrlBuilder.withResultCount(count).withLang(lang).withQuery(query).withResultCount(count).withTopic(topic);
+				googleUrlBuilder.withResultCount(count).withLang(lang).withQuery(query).withResultCount(count).withTopic(topic).withOutput(output);
 				document =  googleNewsFeed.requestNewsFeed(googleUrlBuilder.build()).get();
 		} catch (InterruptedException | ExecutionException e) {
 			throw new HubotekException(e);

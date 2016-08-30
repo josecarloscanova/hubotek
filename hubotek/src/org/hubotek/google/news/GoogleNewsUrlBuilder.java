@@ -2,6 +2,7 @@ package org.hubotek.google.news;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
 
 //TODO: create a validation filter for url parameters.
@@ -13,38 +14,55 @@ public class GoogleNewsUrlBuilder {
 	public GoogleNewsUrlBuilder(){}
 	
 	public GoogleNewsUrlBuilder withLang(String lang){ 
-		put(GoogleNewsUrlParametersEnum.HL, lang);
+		if (notEmpty(lang))
+			put(GoogleNewsUrlParametersEnum.HL, lang);
 		return this;
 	}
 	
 	public GoogleNewsUrlBuilder withTopic(String topic)
 	{ 
-		put(GoogleNewsUrlParametersEnum.CF, topic);
+		if (notEmpty(topic))
+			put(GoogleNewsUrlParametersEnum.CF, topic);
+		return this;
+	}
+	
+	public GoogleNewsUrlBuilder withOutput(String output)
+	{ 
+		if (notEmpty(output))
+			put(GoogleNewsUrlParametersEnum.OUTPUT, output);
 		return this;
 	}
 	
 	public GoogleNewsUrlBuilder withEdition(String edition)
 	{ 
-		put(GoogleNewsUrlParametersEnum.NED, edition);
+		if (notEmpty(edition))
+			put(GoogleNewsUrlParametersEnum.NED, edition);
 		return this;
 	}
 	
 	public GoogleNewsUrlBuilder withQuery(String query)
 	{ 
-		put(GoogleNewsUrlParametersEnum.QUERY, query);
+		if (notEmpty(query))
+			put(GoogleNewsUrlParametersEnum.QUERY, query);
 		return this;
 	}
 	
 	//TODO: Check if resultCount format is a "numeric integer value"
 	public GoogleNewsUrlBuilder withResultCount(String resultCount)
 	{ 
-		put(GoogleNewsUrlParametersEnum.NUM, resultCount);
+		if (notEmpty(resultCount))
+			put(GoogleNewsUrlParametersEnum.NUM, resultCount);
 		return this;
 	}
 	
 	private void put(GoogleNewsUrlParametersEnum parameter , String value)
 	{ 
 		urlParameterMap.put(parameter, value);
+	}
+	
+	private boolean notEmpty(String val)
+	{ 
+		return (val != null && val.length() > 0) ? true : false;
 	}
 	
 	public List<String> prepareParameterList()
@@ -62,7 +80,15 @@ public class GoogleNewsUrlBuilder {
 	
 	public String build()
 	{ 
-		StringBuilder sb = new StringBuilder("https://news.google.com/news");
+		StringBuilder sb = new StringBuilder();
+		Iterator<String> parameterIterator = prepareParameterList().iterator();
+		while(parameterIterator.hasNext())
+		{ 
+			sb.append(parameterIterator.next());
+			if (parameterIterator.hasNext())
+				sb.append('&');
+		}
+		sb.insert(0, baseUrl).insert(baseUrl.length(), '?');
 		return sb.toString();
 	}
 }
