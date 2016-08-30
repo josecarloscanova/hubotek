@@ -1,8 +1,8 @@
 package org.hubotek;
 
+import org.hubotek.google.news.GoogleNewsFeed;
 import org.hubotek.google.news.feed.FeedParser;
 import org.hubotek.services.HttpRequestAccessor;
-import org.hubotek.services.google.GoogleNewsFeed;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -31,11 +31,4 @@ public class Application {
     	return new FeedParser();
     }
 
-//    <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="applicationConversionService">
-//    <property name="converters">
-//      <set>
-//        <bean class="com.somecompany.dont.run.with.scissors.converters.StringToEntityConverterFactory"/>
-//      </set>
-//    </property>
-//  </bean>
 }
