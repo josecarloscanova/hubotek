@@ -1,8 +1,7 @@
 package org.hubotek.model.rss;
 
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import org.hubotek.model.Document;
 
 public class RssDocument implements Document{
@@ -10,7 +9,6 @@ public class RssDocument implements Document{
 	private RssBody rssBody; 
 	private RssImage rssImage; 
 	private List<RssItem> rssItems; 
-	
 	
 	public RssDocument(){
 		rssItems = new ArrayList<RssItem>();
