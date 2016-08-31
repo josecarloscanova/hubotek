@@ -50,46 +50,53 @@ public class RssDocumentBuilder {
 				String itemParentExpression = "/rss/channel/item";
 				XPath xPath =  XPathFactory.newInstance().newXPath();
 				NodeList itemNodes = getNodeListWithXPath(itemParentExpression , rssDocument);
-				
-				for (int i = 0 ; i < itemNodes.getLength();i++)
-				{ 
-					int nodeposition = i+1;
-					StringBuilder itemChildBaseExpression = new StringBuilder().append(itemParentExpression).append("[").append(nodeposition).append("]");
-					
-					StringBuilder itemTitleExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.TITLE.elementName());
-					Node titleNode = (Node)xPath.compile(itemTitleExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-					String title = titleNode.getTextContent();
-					
-					StringBuilder categoryExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.CATEGORY.elementName());
-					Node categoryNode = (Node)xPath.compile(categoryExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-					String category = categoryNode.getTextContent();
-					 
-					 
-					StringBuilder linkExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.LINK.elementName());
-//					Node linkNode = (Node)xPath.compile(linkExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-					NodeList linkNodeList = getNodeListWithXPath(linkExpression.toString(),  rssDocument);
-					String link = linkNodeList.item(0).getTextContent();
-					
-					StringBuilder guidExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.GUID.elementName());
-					Node guidNode = (Node)xPath.compile(guidExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-					String guid = guidNode.getTextContent();
-
-					StringBuilder pubDateExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.PUBDATE.elementName());
-					Node pubDateNode = (Node)xPath.compile(pubDateExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-					String pubDate = pubDateNode.getTextContent();
-
-					StringBuilder descriptionExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.DESCRIPTION.elementName());
-					Node descriptionNode = (Node)xPath.compile(descriptionExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-					String description = descriptionNode.getTextContent();
-					
-					RssItem rssItem = new RssItem (title , link , guid,category, pubDate , description);
-					feedItems.add(rssItem);					
-				}
+				if (itemNodes!=null)
+					for (int i = 0 ; i < itemNodes.getLength();i++)
+					{ 
+						int nodeposition = i+1;
+						StringBuilder itemChildBaseExpression = new StringBuilder().append(itemParentExpression).append("[").append(nodeposition).append("]");
+						
+						StringBuilder itemTitleExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.TITLE.elementName());
+						Node titleNode = (Node)xPath.compile(itemTitleExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
+						String title = getTextContent(titleNode);
+						
+						StringBuilder categoryExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.CATEGORY.elementName());
+						Node categoryNode = (Node)xPath.compile(categoryExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
+						String category = getTextContent(categoryNode);
+						 
+						 
+						StringBuilder linkExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.LINK.elementName());
+	//					Node linkNode = (Node)xPath.compile(linkExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
+						NodeList linkNodeList = getNodeListWithXPath(linkExpression.toString(),  rssDocument);
+						String link = "";
+						if (linkNodeList.getLength() >0){
+							link = getTextContent(linkNodeList.item(0));
+						}
+						
+						StringBuilder guidExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.GUID.elementName());
+						Node guidNode = (Node)xPath.compile(guidExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
+						String guid = getTextContent(guidNode);
+	
+						StringBuilder pubDateExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.PUBDATE.elementName());
+						Node pubDateNode = (Node)xPath.compile(pubDateExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
+						String pubDate = getTextContent(pubDateNode);
+	
+						StringBuilder descriptionExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.DESCRIPTION.elementName());
+						Node descriptionNode = (Node)xPath.compile(descriptionExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
+						String description = getTextContent(descriptionNode);
+						
+						RssItem rssItem = new RssItem (title , link , guid,category, pubDate , description);
+						feedItems.add(rssItem);					
+					}
 				rssNewsDocument.setRssItems(feedItems);
 		}catch (Exception e){ 
 			throw new HubotekException(e);
 		}
 		return this;
+	}
+
+	private String getTextContent(Node titleNode) {
+		return (titleNode!=null && titleNode.hasChildNodes()) ? titleNode.getTextContent() : "";
 	}
 
 	private RssDocumentBuilder withImage(Document rssDocument) {

@@ -1,5 +1,6 @@
 package org.hubotek.google.news;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;
@@ -8,7 +9,7 @@ import java.util.List;
 //TODO: create a validation filter for url parameters.
 public class GoogleNewsUrlBuilder {
 
-	String baseUrl = "https://news.google.com/news";; 
+	String baseUrl = "https://news.google.com/news"; 
 	private EnumMap<GoogleNewsUrlParametersEnum,String> urlParameterMap = new EnumMap<GoogleNewsUrlParametersEnum,String>(GoogleNewsUrlParametersEnum.class);
 	
 	public GoogleNewsUrlBuilder(){}
@@ -47,11 +48,25 @@ public class GoogleNewsUrlBuilder {
 		return this;
 	}
 	
+	public GoogleNewsUrlBuilder withScoring(String scoring) {
+		if(notEmpty(scoring))
+			put(GoogleNewsUrlParametersEnum.SCORING,scoring);
+		return this;
+	}
+	
 	//TODO: Check if resultCount format is a "numeric integer value"
 	public GoogleNewsUrlBuilder withResultCount(String resultCount)
 	{ 
 		if (notEmpty(resultCount))
 			put(GoogleNewsUrlParametersEnum.NUM, resultCount);
+		return this;
+	}
+	
+	//TODO: use the non deprecated method.
+	public GoogleNewsUrlBuilder withCity(String city) {
+		if (notEmpty(city)){
+			put(GoogleNewsUrlParametersEnum.CITY,URLEncoder.encode(city));
+		}
 		return this;
 	}
 	
@@ -91,4 +106,5 @@ public class GoogleNewsUrlBuilder {
 		sb.insert(0, baseUrl).insert(baseUrl.length(), '?');
 		return sb.toString();
 	}
+
 }

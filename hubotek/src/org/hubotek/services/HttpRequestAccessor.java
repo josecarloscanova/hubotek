@@ -27,7 +27,6 @@ public class HttpRequestAccessor extends HttpAccessor{
 	@Autowired
 	FeedParser feedParser; 
 	
-	
 	public HttpRequestAccessor()
 	{ 
 		super();
