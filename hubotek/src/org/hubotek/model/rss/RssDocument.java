@@ -1,9 +1,11 @@
-package org.hubotek.rss;
+package org.hubotek.model.rss;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.ArrayList;
+import org.hubotek.model.Document;
 
-public class RssDocument {
+public class RssDocument implements Document{
 
 	private RssBody rssBody; 
 	private RssImage rssImage; 

@@ -2,8 +2,8 @@ package org.hubotek.google.news;
 
 import java.util.concurrent.Future;
 
-import org.hubotek.rss.RssDocument;
 import org.springframework.stereotype.Service;
+import org.hubotek.model.rss.RssDocument;
 import org.hubotek.services.HttpRequestAccessor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;

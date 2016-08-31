@@ -2,8 +2,8 @@ package org.hubotek.google.news;
 
 import java.util.concurrent.ExecutionException;
 
-import org.hubotek.rss.RssDocument;
 import org.hubotek.HubotekException;
+import org.hubotek.model.rss.RssDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

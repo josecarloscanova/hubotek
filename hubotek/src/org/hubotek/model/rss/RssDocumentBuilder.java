@@ -1,4 +1,4 @@
-package org.hubotek.rss;
+package org.hubotek.model.rss;
 
 import java.util.ArrayList;
 import java.util.List;

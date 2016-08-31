@@ -1,4 +1,4 @@
-package org.hubotek.rss;
+package org.hubotek.model.rss;
 
 public class RssImage
 {
