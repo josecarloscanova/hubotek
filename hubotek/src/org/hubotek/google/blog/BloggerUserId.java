@@ -1,4 +1,4 @@
-package org.hubotek.blog;
+package org.hubotek.google.blog;
 
 public class BloggerUserId {
 
