@@ -5,8 +5,6 @@
 * 
 * Modified, excluded YQL API dependency... 
 * Altered URL for news. 
-* var YQLstr = 'SELECT channel.item FROM feednormalizer WHERE output="rss_2.0" AND url ="' + def.FeedUrl + '" LIMIT ' + def.MaxCount;
-* https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent(YQLstr) + "&format=json&diagnostics=false&callback=?
 * TODO: next version update for an arbitrary(configurable), URL. 
 */
 
@@ -26,7 +24,7 @@
         var id = $(this).attr("id"), i, s = "", dt;
         $("#" + id).empty();
         if (def.FeedUrl == undefined) return;       
-        $("#" + id).append('<img src="images/loader1.gif" />');
+        $("#" + id).append('<img src="images/animated_nipple1_8080.gif" />');
 
         $.ajax({
             url: def.RssHost,

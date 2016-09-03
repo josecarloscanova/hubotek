@@ -37,18 +37,18 @@ public class GoogleRestController {
 	private GoogleNewsFeed googleNewsFeed;
 	
 	@RequestMapping(name="/googleNews",method=RequestMethod.GET)
-	public RssDocument getGoogleNewsFeed(@RequestParam(value="lang", defaultValue="en_US") String lang , 
+	public RssDocument getGoogleNewsFeed(@RequestParam(value="lang", defaultValue="") String lang , 
 										 @RequestParam(value="num" , defaultValue="5") String count , 
-										 @RequestParam(value="topic" , defaultValue="all") String topic , 
+										 @RequestParam(value="cf" , defaultValue="all") String code , 
 										 @RequestParam(value="query" , defaultValue="") String query , 
+										 @RequestParam(value="topic" , defaultValue="") String topic ,
 										 @RequestParam(value="output" , defaultValue="rss") String output , 
 										 @RequestParam(value="edition" , defaultValue="en") String edition , 
 										 @RequestParam(value="scoring" , defaultValue="r") String scoring ,
-										 @RequestParam(value="city" , defaultValue="")String city) {
+										 @RequestParam(value="city" , defaultValue="") String city) {
 		RssDocument document = null;
 		try {
-				GoogleNewsUrlBuilder googleUrlBuilder = new GoogleNewsUrlBuilder();
-				googleUrlBuilder.withResultCount(count).withLang(lang).withQuery(query).withTopic(topic).withOutput(output).withEdition(edition).withScoring(scoring).withCity(city);
+				GoogleNewsUrlBuilder googleUrlBuilder = new GoogleNewsUrlBuilder().withResultCount(count).withLang(lang).withQuery(query).withCode(code).withTopic(topic).withOutput(output).withEdition(edition).withScoring(scoring).withCity(city);
 				document =  googleNewsFeed.requestNewsFeed(googleUrlBuilder.build()).get();
 		} catch (InterruptedException | ExecutionException e) {
 			throw new HubotekException(e);

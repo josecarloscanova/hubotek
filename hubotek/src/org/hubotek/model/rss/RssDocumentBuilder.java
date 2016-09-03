@@ -68,7 +68,9 @@ public class RssDocumentBuilder {
 						StringBuilder linkExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.LINK.elementName());
 	//					Node linkNode = (Node)xPath.compile(linkExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
 						NodeList linkNodeList = getNodeListWithXPath(linkExpression.toString(),  rssDocument);
+						
 						String link = "";
+						
 						if (linkNodeList.getLength() >0){
 							link = getTextContent(linkNodeList.item(0));
 						}
@@ -95,10 +97,6 @@ public class RssDocumentBuilder {
 		return this;
 	}
 
-	private String getTextContent(Node titleNode) {
-		return (titleNode!=null && titleNode.hasChildNodes()) ? titleNode.getTextContent() : "";
-	}
-
 	private RssDocumentBuilder withImage(Document rssDocument) {
 		
 		String imageParentExpression = "/rss/channel/image";
@@ -111,15 +109,15 @@ public class RssDocumentBuilder {
 				
 				StringBuilder imageTitleExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.TITLE.elementName());
 				Node titleNode = getNodeWithXPath(imageTitleExpression.toString() , rssDocument);
-				String imageTitle = titleNode.getTextContent();
+				String imageTitle = getTextContent(titleNode);
 				
 				StringBuilder imageUrlExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.URL.elementName());
 				Node imageUrlNode = getNodeWithXPath(imageUrlExpression.toString() , rssDocument); 
-				String imageUrl = imageUrlNode.getTextContent();
+				String imageUrl = getTextContent(imageUrlNode);
 				
 				StringBuilder imageLinkExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.LINK.elementName());
 				Node imageLinkNode = getNodeWithXPath(imageLinkExpression.toString() , rssDocument); 
-				String imageLink = imageLinkNode.getTextContent();
+				String imageLink = getTextContent(imageLinkNode);
 			
 				RssImage rssImage  = new RssImage(imageTitle , imageUrl , imageLink);
 				rssNewsDocument.setRssImage(rssImage);
@@ -144,6 +142,10 @@ public class RssDocumentBuilder {
 		return this;
 	}
 
+	private String getTextContent(Node titleNode) {
+		return (titleNode!=null && titleNode.hasChildNodes()) ? titleNode.getTextContent() : "";
+	}
+	
 	private String getFromDocument(Document rssDocument , RssDocumentElementsEnum rssDocumentElementEnum) {
 		String value = "";
 		NodeList nodeList = rssDocument.getElementsByTagName(rssDocumentElementEnum.elementName());

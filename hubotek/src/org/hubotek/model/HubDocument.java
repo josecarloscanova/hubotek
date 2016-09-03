@@ -1,4 +1,4 @@
 package org.hubotek.model;
 
-public interface Document{
+public interface HubDocument{
 }

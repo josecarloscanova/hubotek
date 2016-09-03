@@ -2,9 +2,9 @@ package org.hubotek.model.rss;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.hubotek.model.Document;
+import org.hubotek.model.HubDocument;
 
-public class RssDocument implements Document{
+public class RssDocument implements HubDocument{
 
 	private RssBody rssBody; 
 	private RssImage rssImage; 

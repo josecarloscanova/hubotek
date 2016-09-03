@@ -53,5 +53,9 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/spring-xml-2.3.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/stax-api-1.0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/spring-test-4.3.2.RELEASE.jar" sourcepath="war/WEB-INF/lib/spring-test-4.3.2.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

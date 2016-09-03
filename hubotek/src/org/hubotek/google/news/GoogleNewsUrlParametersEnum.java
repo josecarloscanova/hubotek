@@ -61,7 +61,6 @@ Output
 output=FORMAT sets the output format
 rss retrieves RSS feed
 atom retrieves Atom feed
-hl=LANGUAGE sets host language. Default: “us”. Possible values: languages
 hdlOnly=1 displays headlines only
 qsid=ID used in combination with cf=q. Update: This feature has been removed.
 In older versions of Google News, it was possible to change the output of the web interface using a cf parameters. It no longer seems to work, but it is here for completeness. Note that when output is set to “rss” or “atom”, this parameter is in fact ignored.
@@ -112,19 +111,22 @@ http://news.google.com/news?pz=1&cf=all&ned=us&hl=en&scoring=n&q=google&output=r
 
 public enum GoogleNewsUrlParametersEnum {
 	
-	CF("cf"), //limited ti q(quotes),i(images),b(blogs)
-	HL("hl"),
+	CODE("cf"), //limited ti q(quotes),i(images),b(blogs)
+	QSID("qsid"),//required by CF (case CF then required QSID
+	HL("hl"), //en, pt, ... etc... need to check the language code on News Forum.
 	PZ("pz"), //limited to 0-1
 	NED("ned"),
 	QUERY("q"),
 	NUM("num"),
 	OUTPUT("output"),
 	COUNTRY("gl"),
+	TOPIC("tc"),
 	LATITUDE_LONGITUDE("gll"),
 	REGION("gr"),
 	METRO("gm"),
 	ZIPCODE("gpc"),
 	CITY("gcs"),
+	RSZ("rsz"),//result set size.
 	SCORING("scoring"),//limited to r,n,d,o
 	EXACT_PHRASE("as_epq");
 	

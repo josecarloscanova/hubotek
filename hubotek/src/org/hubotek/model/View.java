@@ -4,6 +4,6 @@ import java.util.List;
 
 public class View {
 
-	List<Document> documents;
+	List<HubDocument> documents;
 	
 }

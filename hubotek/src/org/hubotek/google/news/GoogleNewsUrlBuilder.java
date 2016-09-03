@@ -10,9 +10,18 @@ import java.util.List;
 public class GoogleNewsUrlBuilder {
 
 	String baseUrl = "https://news.google.com/news"; 
+	
+	Boolean hasQuery = false; 
+	
 	private EnumMap<GoogleNewsUrlParametersEnum,String> urlParameterMap = new EnumMap<GoogleNewsUrlParametersEnum,String>(GoogleNewsUrlParametersEnum.class);
 	
 	public GoogleNewsUrlBuilder(){}
+	
+	public GoogleNewsUrlBuilder withCode(String lang){ 
+		if (notEmpty(lang))
+			put(GoogleNewsUrlParametersEnum.CODE, lang);
+		return this;
+	}
 	
 	public GoogleNewsUrlBuilder withLang(String lang){ 
 		if (notEmpty(lang))
@@ -23,7 +32,7 @@ public class GoogleNewsUrlBuilder {
 	public GoogleNewsUrlBuilder withTopic(String topic)
 	{ 
 		if (notEmpty(topic))
-			put(GoogleNewsUrlParametersEnum.CF, topic);
+			put(GoogleNewsUrlParametersEnum.TOPIC, topic);
 		return this;
 	}
 	
@@ -43,8 +52,10 @@ public class GoogleNewsUrlBuilder {
 	
 	public GoogleNewsUrlBuilder withQuery(String query)
 	{ 
-		if (notEmpty(query))
+		if (notEmpty(query)){
 			put(GoogleNewsUrlParametersEnum.QUERY, query);
+			hasQuery = true;
+		}
 		return this;
 	}
 	
@@ -92,18 +103,28 @@ public class GoogleNewsUrlBuilder {
 		return paramList;
 	}
 	
-	
 	public String build()
 	{ 
 		StringBuilder sb = new StringBuilder();
-		Iterator<String> parameterIterator = prepareParameterList().iterator();
-		while(parameterIterator.hasNext())
-		{ 
-			sb.append(parameterIterator.next());
-			if (parameterIterator.hasNext())
-				sb.append('&');
+		if (!hasQuery){ 
+			String query = urlParameterMap.get(GoogleNewsUrlParametersEnum.QUERY);
+			String resultCount = urlParameterMap.get(GoogleNewsUrlParametersEnum.NUM);
+			String output = urlParameterMap.get(GoogleNewsUrlParametersEnum.OUTPUT);
+			sb.append(GoogleNewsUrlParametersEnum.QUERY.getUrlParameter()).append("=").append(query)
+			.append("&").append(GoogleNewsUrlParametersEnum.NUM.getUrlParameter()).append("=").append(resultCount)
+			.append("&").append(GoogleNewsUrlParametersEnum.OUTPUT.getUrlParameter()).append("=").append(output);
+		}
+		else { 
+			Iterator<String> parameterIterator = prepareParameterList().iterator();
+			while(parameterIterator.hasNext())
+			{ 
+				sb.append(parameterIterator.next());
+				if (parameterIterator.hasNext())
+					sb.append('&');
+			}
 		}
 		sb.insert(0, baseUrl).insert(baseUrl.length(), '?');
+		System.out.println(sb.toString());
 		return sb.toString();
 	}
 

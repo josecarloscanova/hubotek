@@ -40,6 +40,7 @@ public class HttpRequestAccessor extends HttpAccessor{
 		this.isHttpClient = isHttpClient;
 	}
 	
+	//TODO: implement non OK scenarios.
 	public RssDocument doRequest(String location, ResponseCallback callback) 
 	{ 
 		Document rssDocument = null;
