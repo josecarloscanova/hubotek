@@ -13,9 +13,9 @@
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
   </system-properties>
 
-  <env-variables>
+<!--   <env-variables>
   	<env-var name="DEFAULT_ENCODING" value="UTF-8" />
-  </env-variables>
+  </env-variables> -->
 
   <!-- ... -->
   <async-session-persistence enabled="true" queue-name="session_queue"/>

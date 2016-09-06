@@ -4,19 +4,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="content-language" content="en" />
 <title>FeedEk jQuery RSS/ATOM Feed Plugin Demo | jQuery RSS/ATOM Parser Plugin FeedEk Demo</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
 <style>
     body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #141414;font-size: 13px;line-height: 17px !important;}
     .rssDiv{float: left;padding-right: 35px;background-color: #111;width:100%;text-align:center}
     ul{width: 300px !important;}
 </style>
+<script src="https://www.google.com/jsapi/?key=AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ"
+      type="text/javascript"></script>
+<script src="http://www.google.com/uds/solutions/dynamicfeed/gfdynamicfeedcontrol.js"
+      type="text/javascript"></script>
+<script src='https://code.jquery.com/jquery-1.11.3.js'> </script>  
 </head>
-<body style="background-color:#111">
-    <div class="rssDiv">
-        <div id="divRss" style="float:left"></div>
-        <div id="divRss2" style="float:right"></div>
+<body style="background-color:#141414">
+   <div class="container">
+     <div class="row">
+	    <div class="rssDiv">
+		  		<div class="col-xs-6 col-md-4" style="background-color: #141414">
+		        		<div id="divRss" style="float:left"></div>
+		        </div>
+		        <div class="col-xs-6 col-md-4" style="background-color: #141414">
+		        	<div id="feedControl">Loading...</div>
+		        </div>
+		        <div class="col-xs-6 col-md-4" style="background-color: #141414">
+		        	<div id="divRss2" style="float:right"></div>
+		        </div>
+	    </div>
+	  </div>  
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>    
 <script type="text/javascript" src="js/moment.js"></script>
 <script type="text/javascript" src="js/FeedEk.js"></script>
 <script type="text/javascript">
@@ -42,6 +59,24 @@
             RssHost:'https://hubotek.appspot.com/s_content/googleNews'
         });
     });
+    function loadFeedControl() {
+      /* var feed  = "http://rss.people.com/web/people/rss/topheadlines/index.xml"; */
+      var feed = "http://news.google.com/news/section?cf=all&pz=1&topic=tc&output=rss"
+      var fg = new GFdynamicFeedControl(feed, "feedControl");
+    }
+    /**
+     * Use google.load() to load the AJAX Feeds API
+     * Use google.setOnLoadCallback() to call loadFeedControl once the page loads
+     */
+    google.load("feeds", "1");
+    var options = {
+    	    numResults : 6,
+    	    displayTime : 5000,
+    	    fadeOutTime : 500,
+    	    linkTarget : '1-',
+    	    pauseOnHover : false
+    	  }
+    google.setOnLoadCallback(loadFeedControl,options);
 </script>
 </body>
 </html>
