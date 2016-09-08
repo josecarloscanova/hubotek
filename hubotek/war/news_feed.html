@@ -13,22 +13,20 @@
 </style>
 <script src="https://www.google.com/jsapi/?key=AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ"
       type="text/javascript"></script>
-<script src="http://www.google.com/uds/solutions/dynamicfeed/gfdynamicfeedcontrol.js"
-      type="text/javascript"></script>
-<script src='https://code.jquery.com/jquery-1.11.3.js'> </script>  
+<script src='js/jquery-3.1.0.min.js'> </script>  
 </head>
 <body style="background-color:#141414">
-   <div class="container">
+   <div class="container-fluid" style="text-align:center">
      <div class="row">
-	    <div class="rssDiv">
+	    <div class="rssDiv row">
 		  		<div class="col-xs-6 col-md-4" style="background-color: #141414">
-		        		<div id="divRss" style="float:left"></div>
-		        </div>
-		        <div class="col-xs-6 col-md-4" style="background-color: #141414;text-align:justify">
-		        	<div id="feedControl">Loading...</div>
+		        		<div id="divRss"></div>
 		        </div>
 		        <div class="col-xs-6 col-md-4" style="background-color: #141414">
-		        	<div id="divRss2" style="float:right"></div>
+		        	<div id="divRss2"></div>
+		        </div>
+		        <div class="col-xs-6 col-md-4" style="background-color: #141414">
+		        	<div id="divRss3"></div>
 		        </div>
 	    </div>
 	  </div>  
@@ -58,25 +56,24 @@
             DateFormatLang:'en',
             RssHost:'https://hubotek.appspot.com/s_content/googleNews'
         });
+        $('#divRss3').FeedEk({
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'https://hubotek.appspot.com/s_content/googleNews'
+        });
     });
-    function loadFeedControl() {
-      /* var feed  = "http://rss.people.com/web/people/rss/topheadlines/index.xml"; */
-      var feed = "http://news.google.com/news/section?cf=all&pz=1&topic=tc&output=rss"
-      var fg = new GFdynamicFeedControl(feed, "feedControl");
-    }
-    /**
-     * Use google.load() to load the AJAX Feeds API
-     * Use google.setOnLoadCallback() to call loadFeedControl once the page loads
-     */
-    google.load("feeds", "1");
-    var options = {
+/*     var options = {
     	    numResults : 6,
     	    displayTime : 5000,
     	    fadeOutTime : 500,
     	    linkTarget : '1-',
     	    pauseOnHover : false
-    	  }
-    google.setOnLoadCallback(loadFeedControl,options);
+    	  } */
 </script>
 </body>
 </html>
