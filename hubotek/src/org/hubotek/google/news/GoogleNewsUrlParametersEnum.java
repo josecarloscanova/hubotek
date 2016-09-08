@@ -61,7 +61,6 @@ Output
 output=FORMAT sets the output format
 rss retrieves RSS feed
 atom retrieves Atom feed
-hl=LANGUAGE sets host language. Default: “us”. Possible values: languages
 hdlOnly=1 displays headlines only
 qsid=ID used in combination with cf=q. Update: This feature has been removed.
 In older versions of Google News, it was possible to change the output of the web interface using a cf parameters. It no longer seems to work, but it is here for completeness. Note that when output is set to “rss” or “atom”, this parameter is in fact ignored.
@@ -92,18 +91,14 @@ key sets API key
 Examples:
 To create RSS for US top stories:
 http://news.google.com/news?pz=1&cf=all&ned=us&hl=en&output=rss
-
 To create RSS for Topic: Technology:
 https://news.google.com/news/section?pz=1&cf=all&topic=tc
 Or
 https://news.google.com/news/section?pz=1&cf=all&ned=us&hl=en&topicsid=en_us:tc&ict=tnv3
-
 To create RSS for keyword search (google) in Topic: Technology:
 https://news.google.com/news/section?pz=1&cf=all&ned=us&hl=en&q=Google&topicsid=en_us:tc&ict=tnv3
-
 To create RSS for keyword search (AT&T) in Topic: Technology:
 https://news.google.com/news/section?pz=1&cf=all&ned=us&hl=en&q=AT%26T&topicsid=en_us:tc&ict=tnv5
-
 To create RSS for keyword (google) and sort output by newest:
 http://news.google.com/news?pz=1&cf=all&ned=us&hl=en&scoring=n&q=google&output=rss
  * @author user
@@ -112,19 +107,22 @@ http://news.google.com/news?pz=1&cf=all&ned=us&hl=en&scoring=n&q=google&output=r
 
 public enum GoogleNewsUrlParametersEnum {
 	
-	CF("cf"), //limited ti q(quotes),i(images),b(blogs)
-	HL("hl"),
+	CODE("cf"), //limited ti q(quotes),i(images),b(blogs)
+	QSID("qsid"),//required by CF (case CF then required QSID
+	HL("hl"), //en, pt, ... etc... need to check the language code on News Forum.
 	PZ("pz"), //limited to 0-1
 	NED("ned"),
 	QUERY("q"),
 	NUM("num"),
 	OUTPUT("output"),
 	COUNTRY("gl"),
+	TOPIC("tc"),
 	LATITUDE_LONGITUDE("gll"),
 	REGION("gr"),
 	METRO("gm"),
 	ZIPCODE("gpc"),
 	CITY("gcs"),
+	RSZ("rsz"),//result set size.
 	SCORING("scoring"),//limited to r,n,d,o
 	EXACT_PHRASE("as_epq");
 	

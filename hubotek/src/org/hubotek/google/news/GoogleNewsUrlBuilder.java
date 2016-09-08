@@ -20,10 +20,18 @@ public class GoogleNewsUrlBuilder {
 		return this;
 	}
 	
+
+	public GoogleNewsUrlBuilder withCode(String code)
+	{ 
+		if (notEmpty(code))
+			put(GoogleNewsUrlParametersEnum.CODE, code);
+		return this;
+	}
+	
 	public GoogleNewsUrlBuilder withTopic(String topic)
 	{ 
 		if (notEmpty(topic))
-			put(GoogleNewsUrlParametersEnum.CF, topic);
+			put(GoogleNewsUrlParametersEnum.TOPIC, topic);
 		return this;
 	}
 	
