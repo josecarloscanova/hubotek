@@ -25,9 +25,15 @@ public class RssDocumentBuilder {
 	private RssDocument rssNewsDocument; 
 
 	public RssDocumentBuilder(){
-		rssNewsDocument = new RssDocument();
+		prepare();
 	}
 
+	public void prepare()
+	{ 
+		rssNewsDocument = new RssDocument();
+	}
+	
+	
 	public RssDocumentBuilder withDocument (Document rssDocument)
 	{ 
 		//TODO: remove this later.
