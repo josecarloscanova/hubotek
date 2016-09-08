@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>${}</title>
+<title>Youtube IFrame</title>
 <link href="css/bootstrap-theme.css"></link>
 <script src="https://www.youtube.com/iframe_api"  type="text/javascript" id="iframe_api"></script>
 <script src="js/jquery-3.1.0.min.js"></script>
@@ -10,8 +10,14 @@
 <script type="text/javascript" src="js/FeedEk.js"></script>
 </head>
 <body>
-<div id="player"></div>
-
+<main>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-6 col-md-4" style="background-color: #141414">
+			<div id="player" style="text-align:center"></div>
+		</div>	
+	</div>
+</div>
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -53,6 +59,7 @@
       function stopVideo() {
         player.stopVideo();
       }
-    </script>
+    </script>    
+</main>    
 </body>
 </html>
