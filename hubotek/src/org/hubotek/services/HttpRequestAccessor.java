@@ -61,7 +61,7 @@ public class HttpRequestAccessor extends HttpAccessor{
 //					FileInputStream fis = new FileInputStream(new File("C:\\cygwin64\\home\\user\\hubotek\\hubotek\\war\\google_news_feed_sample.xml"));
 //					rssDocument = feedParser.parseRssFeed(new InputSource(fis));
 					//TODO: remove the parser from the request accessor.
-					rssDocument = feedParser.parseRssFeed(new InputSource(response.getBody()));
+					rssDocument = feedParser.parseFeed(new InputSource(response.getBody()));
 				}
 		}catch (Exception ex)
 		{ 

@@ -8,7 +8,9 @@ public class WebAddress {
 	
 	private String baseUrl;
 	
-	private Boolean hasHttp; 
+	private Boolean hasSecure; 
+	
+	public WebAddress(){}
 	
 	private List<WebAddress> feedAddress;
 
@@ -28,14 +30,6 @@ public class WebAddress {
 		this.baseUrl = baseUrl;
 	}
 
-	public Boolean getHasHttp() {
-		return hasHttp;
-	}
-
-	public void setHasHttp(Boolean hasHttp) {
-		this.hasHttp = hasHttp;
-	}
-
 	public List<WebAddress> getFeedAddress() {
 		return feedAddress;
 	}
@@ -44,4 +38,11 @@ public class WebAddress {
 		this.feedAddress = feedAddress;
 	}
 	
+	public Boolean getHasSecure() {
+		return hasSecure;
+	}
+
+	public void setHasSecure(Boolean hasSecure) {
+		this.hasSecure = hasSecure;
+	}
 }

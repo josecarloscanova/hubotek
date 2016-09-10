@@ -19,7 +19,7 @@ public class FeedParser {
 			documentBuilderFactory = DocumentBuilderFactory.newInstance();
 	}
 	
-	public Document parseRssFeed (InputSource inputSource)
+	public Document parseFeed (InputSource inputSource)
 	{
 		try {
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();

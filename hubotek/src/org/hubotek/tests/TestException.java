@@ -1,4 +1,4 @@
-package org.hubotek.tests.controller.google;
+package org.hubotek.tests;
 
 @SuppressWarnings("serial")
 public class TestException extends RuntimeException {
