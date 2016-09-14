@@ -133,6 +133,14 @@ public enum SearchParameterEnum {
 	GOOGLE_HOST("googlehost"),
 	IMAGE_SIZE("imgSize"),
 	HQ("hq"), // need to check on future this parameter
+	IMAGE_COLOR_TYPE("imgColorType"),
+	LOW_RANGE("lowRange"),
+	HIGH_RANGE("highRange"),
+	SEARCH_TYPE("searchType"),
+	SITE_SEARCH("siteSearch"),
+	IMAGE_DOMINANT_COLOR("imgDominantColor"),
+	SITE_SEARCH_FILTER("siteSearchFilter"),
+	SORT("sort"),
 	KEY("key");
 	
 	private String value;
