@@ -116,7 +116,7 @@ public enum GoogleNewsUrlParametersEnum {
 	NUM("num"),
 	OUTPUT("output"),
 	COUNTRY("gl"),
-	TOPIC("tc"),
+	TOPIC("topic"),
 	LATITUDE_LONGITUDE("gll"),
 	REGION("gr"),
 	METRO("gm"),

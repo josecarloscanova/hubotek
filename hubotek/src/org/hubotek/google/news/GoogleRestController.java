@@ -30,12 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class GoogleRestController {
+public class GoogleRestController  extends FeedParserProvider {
 
-	@Autowired 
-	private GoogleNewsFeed googleNewsFeed;
 	
-	@RequestMapping(name="/googleNews",method=RequestMethod.GET)
+	@RequestMapping(name="/news",method=RequestMethod.GET)
 	public RssDocument getGoogleNewsFeed(@RequestParam(value="lang", defaultValue="en_US") String lang , 
 										 @RequestParam(value="num" , defaultValue="5") String count , 
 										 @RequestParam(value="topic" , defaultValue="all") String topic , 
@@ -53,14 +51,6 @@ public class GoogleRestController {
 			throw new HubotekException(e);
 		}
 		return document;
-	}
-	
-	public GoogleNewsFeed getGoogleNewsFeed() {
-		return googleNewsFeed;
-	}
-
-	public void setGoogleNewsFeedParser(GoogleNewsFeed googleNewsFeedParser) {
-		this.googleNewsFeed = googleNewsFeedParser;
 	}
 
 }
