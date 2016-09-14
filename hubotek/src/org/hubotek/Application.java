@@ -1,5 +1,8 @@
 package org.hubotek;
 
+import javax.cache.CacheFactory;
+
+import org.hubotek.google.cache.CacheFactorySupplier;
 import org.hubotek.google.news.GoogleNewsFeed;
 import org.hubotek.google.news.feed.FeedParser;
 import org.hubotek.services.HttpRequestAccessor;
@@ -20,6 +23,11 @@ public class Application {
     GoogleNewsFeed createGoogleNewsFeedParser()
     { 
     	return new GoogleNewsFeed();
+    }
+    
+    @Bean
+    CacheFactory createCacheFactory(){ 
+    	return new CacheFactorySupplier().get();
     }
     
     @Bean
