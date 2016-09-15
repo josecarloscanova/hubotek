@@ -1,10 +1,12 @@
 package org.hubotek;
 
 import javax.cache.CacheFactory;
+import javax.xml.xpath.XPathFactory;
 
 import org.hubotek.google.cache.CacheFactorySupplier;
 import org.hubotek.google.news.GoogleNewsFeed;
 import org.hubotek.google.news.feed.FeedParser;
+import org.hubotek.google.xpath.XPathFactorySupplier;
 import org.hubotek.services.HttpRequestAccessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,9 +27,15 @@ public class Application {
     	return new GoogleNewsFeed();
     }
     
-    @Bean
+    @Bean(name="cacheFactoryBase")
     CacheFactory createCacheFactory(){ 
     	return new CacheFactorySupplier().get();
+    }
+    
+    @Bean(name="xpathFactoryBase")
+    XPathFactory createXPathFactory()
+    { 
+    	return new XPathFactorySupplier().get();
     }
     
     @Bean

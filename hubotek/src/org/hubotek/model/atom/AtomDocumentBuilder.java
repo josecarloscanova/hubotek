@@ -1,5 +1,7 @@
 package org.hubotek.model.atom;
 
+import org.hubotek.Builder;
+import org.hubotek.google.xpath.XPathFactorySupplier;
 import org.w3c.dom.Document;
 
 /**
@@ -9,9 +11,11 @@ import org.w3c.dom.Document;
  * @author user
  *
  */
-public class AtomDocumentBuilder {
+public class AtomDocumentBuilder implements Builder<AtomDocument>{
 
 	private AtomDocument atomDocument; 
+	
+	private XPathFactorySupplier xpathFactorySupplier;
 
 	public AtomDocumentBuilder(){ 
 		prepare();
@@ -20,6 +24,7 @@ public class AtomDocumentBuilder {
 	public void prepare()
 	{ 
 		atomDocument = new AtomDocument();
+		xpathFactorySupplier = new XPathFactorySupplier();
 	}
 
 	public AtomDocumentBuilder withDocument (Document document){ 

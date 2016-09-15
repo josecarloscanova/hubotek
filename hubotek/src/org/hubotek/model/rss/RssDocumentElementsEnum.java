@@ -1,6 +1,8 @@
 package org.hubotek.model.rss;
 
-public enum RssDocumentElementsEnum {
+import org.hubotek.ElementEnum;
+
+public enum RssDocumentElementsEnum implements ElementEnum<String>{
 	
 	GENERATOR ("generator"),
 	TITLE ("title"),
@@ -22,7 +24,8 @@ public enum RssDocumentElementsEnum {
 		this.elementName = elementName;
 	}
 
-	public String elementName() {
+	@Override
+	public String valueOf() {
 		return elementName;
 	}
 	

@@ -11,7 +11,7 @@ public class AtomDocument implements HubDocument{
 	private List<AtomItem> items;
 	
 	public AtomDocument(){}
-
+	
 	public AtomBody getBody() {
 		return body;
 	}
