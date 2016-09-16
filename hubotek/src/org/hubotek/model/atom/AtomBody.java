@@ -3,6 +3,7 @@ package org.hubotek.model.atom;
 public class AtomBody {
 
 	private String version = "1.0";
+	private String id;
 	private String title; 
 	private String link; 
 	private String description;
@@ -12,8 +13,9 @@ public class AtomBody {
 	public AtomBody(){}
 	
 	
-	public AtomBody(String version, String title, String link, String description, String language, String updated) {
+	public AtomBody(String id , String version, String title, String link, String description, String language, String updated) {
 		super();
+		this.id = id;
 		this.version = version;
 		this.title = title;
 		this.link = link;
@@ -21,6 +23,16 @@ public class AtomBody {
 		this.language = language;
 		this.updated = updated;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 
 	public String getVersion() {
 		return version;

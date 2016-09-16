@@ -7,12 +7,11 @@ import javax.xml.xpath.XPathFactory;
 
 import org.hubotek.ElementEnum;
 import org.hubotek.HubotekException;
-import org.hubotek.model.rss.RssDocumentElementsEnum;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class DOMElementExtratorUtil {
+public class DOMElementExtratorUtil<T extends ElementEnum<String>> {
 
 	private XPathFactory xpathFactory;
 	
@@ -25,33 +24,33 @@ public class DOMElementExtratorUtil {
 		xpathFactory = XPathFactory.newInstance();
 	}
 
-	protected <T extends ElementEnum<String>> String getFromDocument(Document rssDocument , T elementEnum) {
+	protected String getFromDocument(Document document , T elementEnum) {
 		String value = "";
-		NodeList nodeList = rssDocument.getElementsByTagName(elementEnum.valueOf());
+		NodeList nodeList = document.getElementsByTagName(elementEnum.valueOf());
 		Node node = nodeList.item(0);
 		if (node !=null)
 			value = node.getTextContent();
 		return value;
 	}
 	
-	protected NodeList getNodeListWithXPath(String nodeExpression , Document rssDocument)
+	protected NodeList getNodeListWithXPath(String nodeExpression , Document document)
 	{ 
 		NodeList nodeList = null;
 		try {
 		XPath xPath = createXPathFromFactory();
-		nodeList  = (NodeList) xPath.compile(nodeExpression).evaluate(rssDocument, XPathConstants.NODESET);
+		nodeList  = (NodeList) xPath.compile(nodeExpression).evaluate(document, XPathConstants.NODESET);
 		} catch (XPathExpressionException e) {
 			throw new HubotekException(e);
 		}
 		return nodeList;
 	}
 	
-	protected Node getNodeWithXPath(String nodeExpression , Document rssDocument)
+	protected Node getNodeWithXPath(String nodeExpression , Document document)
 	{ 
 		Node node = null;
 		try {
 				XPath xPath = createXPathFromFactory();
-				node = (Node) xPath.compile(nodeExpression).evaluate(rssDocument, XPathConstants.NODE);
+				node = (Node) xPath.compile(nodeExpression).evaluate(document, XPathConstants.NODE);
 		} catch (XPathExpressionException e) {
 			throw new HubotekException(e);
 		}

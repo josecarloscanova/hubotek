@@ -1,5 +1,6 @@
 package org.hubotek.model.atom;
 
+import org.hubotek.ElementEnum;
 
 /**
  *  <id>tag:news.google.com,2016-09-09:/1/us/en/1473446574600</id>
@@ -31,7 +32,7 @@ package org.hubotek.model.atom;
  * @author user
  *
  */
-public enum AtomDocumentElementsEnum {
+public enum AtomDocumentElementsEnum implements ElementEnum<String>{
 	
 	ID ("ID"),
 	TITLE ("title"),
@@ -43,16 +44,20 @@ public enum AtomDocumentElementsEnum {
 	RIGHTS("rigths"),
 	UPDATED("updated"),
 	CATEGORY("category"),
-	CONTENT("content");
+	CONTENT("content"),
+	VERSION("version"),
+	DESCRIPTION("description"),
+	LANGUAGE("language");
 	
-	private String elementName;
+	private String value;
 	
 	private AtomDocumentElementsEnum(String elementName)
 	{ 
-		this.elementName = elementName;
+		this.value = elementName;
 	}
 
-	public String elementName() {
-		return elementName;
+	@Override
+	public String valueOf() {
+		return value;
 	}
 }

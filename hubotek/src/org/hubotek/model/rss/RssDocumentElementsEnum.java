@@ -17,16 +17,16 @@ public enum RssDocumentElementsEnum implements ElementEnum<String>{
 	CATEGORY("category"),
 	DESCRIPTION("description");
 	
-	private String elementName;
+	private String value;
 	
 	private RssDocumentElementsEnum(String elementName)
 	{ 
-		this.elementName = elementName;
+		this.value = elementName;
 	}
 
 	@Override
 	public String valueOf() {
-		return elementName;
+		return value;
 	}
 	
 }
