@@ -20,7 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("/org/nanotek/tests/controller/hubotek-servlet.xml")
+@ContextConfiguration("/org/hubotek/tests/controller/google/hubotek-servlet.xml")
 public class GoogleRestControllerTest {
 
 	@Autowired

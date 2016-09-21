@@ -7,13 +7,23 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.hubotek.google.news.feed.FeedParser;
+import org.hubotek.model.atom.AtomBody;
+import org.hubotek.model.atom.AtomDocument;
+import org.hubotek.model.atom.AtomDocumentBuilder;
 import org.hubotek.tests.TestException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+@RunWith(SpringRunner.class)
+@WebAppConfiguration
+@ContextConfiguration("/org/hubotek/tests/controller/google/hubotek-servlet.xml")
 public class GoogleAtomParser {
 
 	DocumentBuilderFactory documentBuilderFactory;
@@ -32,12 +42,12 @@ public class GoogleAtomParser {
 	{ 
 		try {
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			
-			FileInputStream fis = new FileInputStream(new File("C:\\cygwin64\\home\\user\\hubotek\\hubotek\\war\\google_news_feed_sample.xml"));
+			FileInputStream fis = new FileInputStream(new File("C:\\cygwin64\\home\\user\\hubotek\\hubotek\\war\\news_atom.xml"));
 			Document atomDocument = feedParser.parseFeed(new InputSource(fis));
 //			TODO: remove the parser from the request accessor.
-			
-			
+			AtomDocumentBuilder	db = new AtomDocumentBuilder();		
+			AtomDocument ad =  db.withDocument(atomDocument).build();
+			System.out.println(ad.toString());
 		} catch (Exception e) {
 			throw new TestException(e);
 		}

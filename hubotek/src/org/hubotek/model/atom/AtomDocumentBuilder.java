@@ -43,7 +43,7 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 		if (document !=null)
 		{ 
 			withBody(document);
-			withItems(document);
+			withEntries(document);
 		}
 		return this;
 	}
@@ -63,14 +63,11 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 		atomBody.setAuthor(author);
 	}
 
-	private void withItems(Document document) {
+	private void withEntries(Document document) {
 
 			try{ 
-
 				List<AtomEntry> feedEntries = new ArrayList<AtomEntry>(); 
-				XPath xPath =  XPathFactory.newInstance().newXPath();
 				NodeList entryNodes = getNodeListWithXPath(entryParentExpression , document);
-				
 				if (entryNodes!=null)
 					for (int i = 0 ; i < entryNodes.getLength();i++)
 					{ 
@@ -91,8 +88,7 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 						if (linkNodeList.getLength() >0){
 							link = getTextAttribute(linkNodeList.item(0) , "href");
 						}
-						
-						AtomEntry feedEntry = new  AtomEntry( id, title, link, content, updated, category);
+						AtomEntry feedEntry = new  AtomEntry(id, title, link, content, updated, category);
 						feedEntries.add(feedEntry);					
 					}
 				atomDocument.setEntries(feedEntries);
@@ -111,6 +107,9 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 	
 	private void withBody(Document document) 
 	{ 
+		String idpath = "/feed/id"; 
+		String titleXPath = "/feed/title";
+		
 		String id  = getFromDocument(document , AtomDocumentElementsEnum.ID);
 		String title = getFromDocument(document , AtomDocumentElementsEnum.TITLE);
 		String language = getFromDocument(document, AtomDocumentElementsEnum.LANGUAGE);
