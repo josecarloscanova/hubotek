@@ -107,19 +107,21 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 	
 	private void withBody(Document document) 
 	{ 
-		String idpath = "/feed/id"; 
+		String idXPath = "/feed/id"; 
 		String titleXPath = "/feed/title";
+		String linkXPath = "/feed/link";
+		String rightsXPath = "/feed/rights";
+		String updatedXPath = "/feed/updated";
+		String logoXPath = "/feed/logo";
 		
-		String id  = getFromDocument(document , AtomDocumentElementsEnum.ID);
-		String title = getFromDocument(document , AtomDocumentElementsEnum.TITLE);
-		String language = getFromDocument(document, AtomDocumentElementsEnum.LANGUAGE);
-		String link = getFromDocument(document , AtomDocumentElementsEnum.LINK);
-		String copyRight = getFromDocument(document, AtomDocumentElementsEnum.RIGHTS);
-		String version = getFromDocument(document , AtomDocumentElementsEnum.VERSION);
-		String updated = getFromDocument(document , AtomDocumentElementsEnum.UPDATED);
-		String description = getFromDocument(document , AtomDocumentElementsEnum.DESCRIPTION);
-
-		AtomBody atomBody = new AtomBody(id , version, title, link, description, language, updated);
+		String id = getTextContent(getNodeWithXPath(idXPath, document));
+		String title = getTextContent(getNodeWithXPath(titleXPath, document));
+		String rights = getTextContent(getNodeWithXPath(rightsXPath, document));
+		String updated = getTextContent(getNodeWithXPath(updatedXPath, document));
+		String logo = getTextContent(getNodeWithXPath(logoXPath, document));
+		
+		AtomBody atomBody = new AtomBody(id, title, rights, logo, updated);
+		
 		withAuthor(document , atomBody);		
 		atomDocument.setBody(atomBody);
 	}
