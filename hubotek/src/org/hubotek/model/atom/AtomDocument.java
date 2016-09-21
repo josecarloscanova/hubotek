@@ -8,7 +8,7 @@ public class AtomDocument implements HubDocument{
 
 	private AtomBody body;
 	
-	private List<AtomItem> items;
+	private List<AtomEntry> entries;
 	
 	public AtomDocument(){}
 	
@@ -20,12 +20,12 @@ public class AtomDocument implements HubDocument{
 		this.body = body;
 	}
 
-	public List<AtomItem> getItems() {
-		return items;
+	public List<AtomEntry> getEntries() {
+		return entries;
 	}
 
-	public void setItems(List<AtomItem> items) {
-		this.items = items;
+	public void setEntries(List<AtomEntry> entries) {
+		this.entries = entries;
 	}
 
 }

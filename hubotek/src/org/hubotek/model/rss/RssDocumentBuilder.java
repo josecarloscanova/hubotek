@@ -62,7 +62,6 @@ public class RssDocumentBuilder implements Builder<RssDocument>{
 					{ 
 						int nodeposition = i+1;
 						StringBuilder itemChildBaseExpression = new StringBuilder().append(itemParentExpression).append("[").append(nodeposition).append("]");
-						
 						StringBuilder itemTitleExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.TITLE.valueOf());
 						Node titleNode = (Node)xPath.compile(itemTitleExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
 						String title = getTextContent(titleNode);
@@ -102,8 +101,8 @@ public class RssDocumentBuilder implements Builder<RssDocument>{
 		return this;
 	}
 
-	private String getTextContent(Node titleNode) {
-		return (titleNode!=null && titleNode.hasChildNodes()) ? titleNode.getTextContent() : "";
+	private String getTextContent(Node node) {
+		return (node!=null && node.hasChildNodes()) ? node.getTextContent() : "";
 	}
 
 	private RssDocumentBuilder withImage(Document rssDocument) {

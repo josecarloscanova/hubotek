@@ -9,9 +9,9 @@ public class AtomBody {
 	private String description;
 	private String language; 
 	private String updated;
+	private Author author;
 	
 	public AtomBody(){}
-	
 	
 	public AtomBody(String id , String version, String title, String link, String description, String language, String updated) {
 		super();
@@ -83,5 +83,13 @@ public class AtomBody {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	} 
-	
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
 }

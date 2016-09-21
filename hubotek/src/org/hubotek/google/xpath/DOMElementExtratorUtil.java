@@ -45,6 +45,10 @@ public class DOMElementExtratorUtil<T extends ElementEnum<String>> {
 		return nodeList;
 	}
 	
+	protected String getTextAttribute(Node node, String attr) {
+		return (node.hasAttributes() == true) ? node.getAttributes().getNamedItem(attr).getTextContent():"";
+	}
+	
 	protected Node getNodeWithXPath(String nodeExpression , Document document)
 	{ 
 		Node node = null;
@@ -55,6 +59,10 @@ public class DOMElementExtratorUtil<T extends ElementEnum<String>> {
 			throw new HubotekException(e);
 		}
 		return node;
+	}
+	
+	protected String getTextContent(Node node) {
+		return (node!=null && node.hasChildNodes()) ? node.getTextContent() : "";
 	}
 	
 	private XPath createXPathFromFactory() {
