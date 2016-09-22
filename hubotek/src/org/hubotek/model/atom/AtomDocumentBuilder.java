@@ -3,13 +3,8 @@ package org.hubotek.model.atom;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.hubotek.Builder;
-import org.hubotek.HubotekException;
+import org.hubotek.TranformationException;
 import org.hubotek.google.xpath.DOMElementExtratorUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -74,15 +69,14 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 						int nodeposition = i+1;
 						String entryChildBaseExpression = new StringBuilder().append(entryParentExpression).append("[").append(nodeposition).append("]").toString();
 						
-						String id = getChildValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.ID);
-						String title = getChildValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.TITLE);
-						String category = getChildValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.CATEGORY);
-						String content = getChildValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.CONTENT);
-						String updated = getChildValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.UPDATED);
+						String id = getChildNodeTextValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.ID);
+						String title = getChildNodeTextValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.TITLE);
+						String category = getChildNodeTextValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.CATEGORY);
+						String content = getChildNodeTextValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.CONTENT);
+						String updated = getChildNodeTextValueWithXPath(document , entryChildBaseExpression , AtomDocumentElementsEnum.UPDATED);
 						
 						
 						StringBuilder linkExpression = new StringBuilder(entryChildBaseExpression).append("/").append(AtomDocumentElementsEnum.LINK.valueOf());
-	//					Node linkNode = (Node)xPath.compile(linkExpression.toString()).evaluate(atomDocument, XPathConstants.NODE);
 						NodeList linkNodeList = getNodeListWithXPath(linkExpression.toString(),  document);
 						String link = "";
 						if (linkNodeList.getLength() >0){
@@ -93,18 +87,10 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 					}
 				atomDocument.setEntries(feedEntries);
 			}catch (Exception e){ 
-				throw new HubotekException(e);
+				throw new TranformationException(e);
 			}
 	}
 
-	private String getChildValueWithXPath(Document  document , String parentExpression , AtomDocumentElementsEnum elementEnum) throws XPathExpressionException{
-		XPath xPath =  XPathFactory.newInstance().newXPath();
-		StringBuilder subExpression = new StringBuilder(parentExpression).append("/").append(elementEnum.valueOf());
-		Node idNode = (Node)xPath.compile(subExpression.toString()).evaluate(document, XPathConstants.NODE);
-		return getTextContent(idNode);
-	}
-	
-	
 	private void withBody(Document document) 
 	{ 
 		String idXPath = "/feed/id"; 
