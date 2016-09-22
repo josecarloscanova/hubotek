@@ -95,6 +95,7 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 	{ 
 		String idXPath = "/feed/id"; 
 		String titleXPath = "/feed/title";
+		//TODO:
 		String linkXPath = "/feed/link";
 		String rightsXPath = "/feed/rights";
 		String updatedXPath = "/feed/updated";
