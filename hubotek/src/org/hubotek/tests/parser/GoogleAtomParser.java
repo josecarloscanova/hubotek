@@ -41,7 +41,6 @@ public class GoogleAtomParser {
 	public void testAtomParser()
 	{ 
 		try {
-			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			FileInputStream fis = new FileInputStream(new File("C:\\cygwin64\\home\\user\\hubotek\\hubotek\\war\\news_atom.xml"));
 			Document atomDocument = feedParser.parseFeed(new InputSource(fis));
 //			TODO: remove the parser from the request accessor.

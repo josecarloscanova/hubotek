@@ -6,83 +6,78 @@ public class AtomBody {
 	private String id;
 	private String title; 
 	private String link; 
-	private String description;
-	private String language; 
+	private String rights;
+	private String logo;
 	private String updated;
+	
 	private Author author;
 	
 	public AtomBody(){}
 	
-	public AtomBody(String id , String version, String title, String link, String description, String language, String updated) {
+	public AtomBody(String id, String title, String rights, String logo, String updated) {
 		super();
 		this.id = id;
-		this.version = version;
 		this.title = title;
-		this.link = link;
-		this.description = description;
-		this.language = language;
+		this.rights = rights;
+		this.logo = logo;
 		this.updated = updated;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-
 	public void setId(String id) {
 		this.id = id;
 	}
 
-
-	public String getVersion() {
-		return version;
-	}
-	
-	
-	public void setVersion(String version) {
-		this.version = version;
-	}
-	
-	
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	
+
 	public String getLink() {
 		return link;
 	}
+
 	public void setLink(String link) {
 		this.link = link;
 	}
-	
-	
-	public String getDescription() {
-		return description;
+
+	public String getRights() {
+		return rights;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setRights(String rights) {
+		this.rights = rights;
 	}
-	
-	
-	public String getLanguage() {
-		return language;
+
+	public String getLogo() {
+		return logo;
 	}
-	public void setLanguage(String language) {
-		this.language = language;
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
-	
-	
+
 	public String getUpdated() {
 		return updated;
 	}
-	
+
 	public void setUpdated(String updated) {
 		this.updated = updated;
-	} 
+	}
 
 	public Author getAuthor() {
 		return author;

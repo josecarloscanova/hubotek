@@ -3,13 +3,13 @@ package org.hubotek.model.rss;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
+import javax.validation.constraints.NotNull;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
+import org.apache.log4j.Logger;
 import org.hubotek.Builder;
-import org.hubotek.HubotekException;
+import org.hubotek.TransformationException;
+import org.hubotek.google.xpath.DOMElementExtratorUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -21,9 +21,10 @@ import org.w3c.dom.NodeList;
  * @author user
  *
  */
-public class RssDocumentBuilder implements Builder<RssDocument>{
+public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElementsEnum> implements Builder<RssDocument>{
 
 	private RssDocument rssNewsDocument; 
+	private static final Logger logger = Logger.getLogger(RssDocumentBuilder.class);
 
 	public RssDocumentBuilder(){
 		prepare();
@@ -33,105 +34,85 @@ public class RssDocumentBuilder implements Builder<RssDocument>{
 	{ 
 		rssNewsDocument = new RssDocument();
 	}
-	
-	
-	public RssDocumentBuilder withDocument (Document rssDocument)
+
+	public RssDocumentBuilder withDocument (@NotNull Document document) throws TransformationException
 	{ 
-		//TODO: remove this later.
-		if (rssDocument !=null){ 
-			withBody(rssDocument);
-			withImage(rssDocument);
-			withItems(rssDocument);
-		}
+		logger.debug("Starting document tranformation");
+		withBody(document);
+		withImage(document);
+		withItems(document);
+		logger.debug("Finished Object transformation");
 		return this;
 	}
 
 	public RssDocument build()
 	{ 
+		logger.debug("returning document");
 		return rssNewsDocument;
 	}
 
-	private RssDocumentBuilder withItems(Document rssDocument) {
-		try{ 
-				List<RssItem> feedItems = new ArrayList<RssItem>(); 
-				String itemParentExpression = "/rss/channel/item";
-				XPath xPath =  XPathFactory.newInstance().newXPath();
-				NodeList itemNodes = getNodeListWithXPath(itemParentExpression , rssDocument);
-				if (itemNodes!=null)
-					for (int i = 0 ; i < itemNodes.getLength();i++)
-					{ 
-						int nodeposition = i+1;
-						StringBuilder itemChildBaseExpression = new StringBuilder().append(itemParentExpression).append("[").append(nodeposition).append("]");
-						StringBuilder itemTitleExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.TITLE.valueOf());
-						Node titleNode = (Node)xPath.compile(itemTitleExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-						String title = getTextContent(titleNode);
-						
-						StringBuilder categoryExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.CATEGORY.valueOf());
-						Node categoryNode = (Node)xPath.compile(categoryExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-						String category = getTextContent(categoryNode);
-						 
-						 
-						StringBuilder linkExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.LINK.valueOf());
-	//					Node linkNode = (Node)xPath.compile(linkExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-						NodeList linkNodeList = getNodeListWithXPath(linkExpression.toString(),  rssDocument);
-						String link = "";
-						if (linkNodeList.getLength() >0){
-							link = getTextContent(linkNodeList.item(0));
-						}
-						
-						StringBuilder guidExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.GUID.valueOf());
-						Node guidNode = (Node)xPath.compile(guidExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-						String guid = getTextContent(guidNode);
-	
-						StringBuilder pubDateExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.PUBDATE.valueOf());
-						Node pubDateNode = (Node)xPath.compile(pubDateExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-						String pubDate = getTextContent(pubDateNode);
-	
-						StringBuilder descriptionExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.DESCRIPTION.valueOf());
-						Node descriptionNode = (Node)xPath.compile(descriptionExpression.toString()).evaluate(rssDocument, XPathConstants.NODE);
-						String description = getTextContent(descriptionNode);
-						
-						RssItem rssItem = new RssItem (title , link , guid,category, pubDate , description);
-						feedItems.add(rssItem);					
+	private RssDocumentBuilder withItems(Document document)  {
+		List<RssItem> feedItems = new ArrayList<RssItem>(); 
+		String itemParentExpression = "/rss/channel/item";
+		NodeList itemNodes = getNodeListWithXPath(itemParentExpression , document);
+		try{ 		
+			if (itemNodes!=null)
+				for (int i = 0 ; i < itemNodes.getLength();i++)
+				{ 
+					int nodeposition = i+1;
+					StringBuilder itemChildBaseExpression = new StringBuilder().append(itemParentExpression).append("[").append(nodeposition).append("]");
+					String title = getChildNodeTextValueWithXPath(document , itemChildBaseExpression.toString() , RssDocumentElementsEnum.TITLE);
+					String category =  getChildNodeTextValueWithXPath(document , itemChildBaseExpression.toString() , RssDocumentElementsEnum.CATEGORY);
+					StringBuilder linkExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.LINK.valueOf());
+					NodeList linkNodeList = getNodeListWithXPath(linkExpression.toString(),  document);
+					String link = "";
+					if (linkNodeList.getLength() >0){
+						link = getTextContent(linkNodeList.item(0));
 					}
-				rssNewsDocument.setRssItems(feedItems);
-		}catch (Exception e){ 
-			throw new HubotekException(e);
+					String guid = getChildNodeTextValueWithXPath(document , itemChildBaseExpression.toString() , RssDocumentElementsEnum.GUID);
+					String pubDate = getChildNodeTextValueWithXPath(document , itemChildBaseExpression.toString() , RssDocumentElementsEnum.PUBDATE);
+					String description = getChildNodeTextValueWithXPath(document , itemChildBaseExpression.toString() , RssDocumentElementsEnum.DESCRIPTION);
+					RssItem rssItem = new RssItem (title , link , guid,category, pubDate , description);
+					feedItems.add(rssItem);					
+				}
+			rssNewsDocument.setRssItems(feedItems);
+		}catch (XPathExpressionException e){ 
+			throw  new TransformationException(e);
 		}
 		return this;
 	}
 
-	private String getTextContent(Node node) {
-		return (node!=null && node.hasChildNodes()) ? node.getTextContent() : "";
-	}
+	private void withImage(Document document)  {
 
-	private RssDocumentBuilder withImage(Document rssDocument) {
-		
-		String imageParentExpression = "/rss/channel/image";
-		NodeList imageNodes = getNodeListWithXPath(imageParentExpression , rssDocument);
-		
-		if (imageNodes.getLength() > 0){
-			
+		try { 
+
+			String imageParentExpression = "/rss/channel/image";
+			NodeList imageNodes = getNodeListWithXPath(imageParentExpression , document);
+
+			if (imageNodes.getLength() > 0){
+
 				int nodeposition = 1;
 				StringBuilder itemChildBaseExpression = new StringBuilder().append(imageParentExpression).append("[").append(nodeposition).append("]");
-				
-				StringBuilder imageTitleExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.TITLE.valueOf());
-				Node titleNode = getNodeWithXPath(imageTitleExpression.toString() , rssDocument);
-				String imageTitle = titleNode.getTextContent();
-				
+
+				String imageTitle = getChildNodeTextValueWithXPath(document , itemChildBaseExpression.toString() , RssDocumentElementsEnum.TITLE);
+
+
 				StringBuilder imageUrlExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.URL.valueOf());
-				Node imageUrlNode = getNodeWithXPath(imageUrlExpression.toString() , rssDocument); 
+				Node imageUrlNode = getNodeWithXPath(imageUrlExpression.toString() , document); 
 				String imageUrl = imageUrlNode.getTextContent();
-				
+
 				StringBuilder imageLinkExpression = new StringBuilder(itemChildBaseExpression).append("/").append(RssDocumentElementsEnum.LINK.valueOf());
-				Node imageLinkNode = getNodeWithXPath(imageLinkExpression.toString() , rssDocument); 
+				Node imageLinkNode = getNodeWithXPath(imageLinkExpression.toString() , document); 
 				String imageLink = imageLinkNode.getTextContent();
-			
+
 				RssImage rssImage  = new RssImage(imageTitle , imageUrl , imageLink);
 				rssNewsDocument.setRssImage(rssImage);
 			}
-		return this;
+		}catch (XPathExpressionException e){ 
+			throw  new TransformationException(e);
+		}
 	}
+
 
 	private RssDocumentBuilder withBody(Document rssDocument)
 	{ 
@@ -150,37 +131,4 @@ public class RssDocumentBuilder implements Builder<RssDocument>{
 		return this;
 	}
 
-	private String getFromDocument(Document rssDocument , RssDocumentElementsEnum rssDocumentElementEnum) {
-		String value = "";
-		NodeList nodeList = rssDocument.getElementsByTagName(rssDocumentElementEnum.valueOf());
-		Node node = nodeList.item(0);
-		if (node !=null)
-			value = node.getTextContent();
-		return value;
-	}
-
-	
-	private NodeList getNodeListWithXPath(String nodeExpression , Document rssDocument)
-	{ 
-		NodeList nodeList = null;
-		try {
-		XPath xPath =  XPathFactory.newInstance().newXPath();
-		nodeList  = (NodeList) xPath.compile(nodeExpression).evaluate(rssDocument, XPathConstants.NODESET);
-		} catch (XPathExpressionException e) {
-			throw new HubotekException(e);
-		}
-		return nodeList;
-	}
-	
-	private Node getNodeWithXPath(String nodeExpression , Document rssDocument)
-	{ 
-		Node node = null;
-		try {
-		XPath xPath =  XPathFactory.newInstance().newXPath();
-		node = (Node) xPath.compile(nodeExpression).evaluate(rssDocument, XPathConstants.NODE);
-		} catch (XPathExpressionException e) {
-			throw new HubotekException(e);
-		}
-		return node;
-	}
 }
