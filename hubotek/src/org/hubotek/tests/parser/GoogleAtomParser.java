@@ -10,6 +10,7 @@ import org.hubotek.google.news.feed.FeedParser;
 import org.hubotek.model.atom.AtomBody;
 import org.hubotek.model.atom.AtomDocument;
 import org.hubotek.model.atom.AtomDocumentBuilder;
+import org.hubotek.service.database.GoogleCseDAO;
 import org.hubotek.tests.TestException;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,9 @@ public class GoogleAtomParser {
 	@Autowired
 	private FeedParser feedParser;
 	
+	@Autowired
+	GoogleCseDAO cseDAO;
+	
 	@Before
 	public void AtomParser()
 	{
@@ -41,11 +45,12 @@ public class GoogleAtomParser {
 	public void testAtomParser()
 	{ 
 		try {
-			FileInputStream fis = new FileInputStream(new File("C:\\cygwin64\\home\\user\\hubotek\\hubotek\\war\\news_atom.xml"));
+			FileInputStream fis = new FileInputStream(new File("C:\\Java\\hubotek\\hubotek\\war\\news_atom.xml"));
 			Document atomDocument = feedParser.parseFeed(new InputSource(fis));
 //			TODO: remove the parser from the request accessor.
 			AtomDocumentBuilder	db = new AtomDocumentBuilder();		
 			AtomDocument ad =  db.withDocument(atomDocument).build();
+			cseDAO.findById("1010");
 			System.out.println(ad.toString());
 		} catch (Exception e) {
 			throw new TestException(e);

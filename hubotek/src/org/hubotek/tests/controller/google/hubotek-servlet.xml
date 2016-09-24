@@ -11,6 +11,34 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+<!-- JPA Configuration for test  -->
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+ 	<bean id="jpaVendorAdapter"  class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+ 		<property name="showSql" value="true" />
+ 	</bean>
+ 	
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- <jee:jndi-lookup id="mysic-brainz-ds" jndi-name="java:/jboss/datasources/MB"/> -->
+	
+	<bean id="pum" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+	    <property name="persistenceXmlLocations">
+	        <list>
+	            <value>classpath*:META-INF/persistence.xml</value>
+	        </list>
+	    </property>
+	    <!-- <property name="defaultDataSource" ref="mysic-brainz-ds"/> -->
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="persistenceUnitManager" ref="pum"/>
+	    <property name="persistenceUnitName" value="hubotek-jetty"/>
+	</bean>	
+	<!-- End JPA Configuration for test -->
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
