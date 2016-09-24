@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hubotek.Builder;
-import org.hubotek.TransformationException;
+import org.hubotek.HubotekException;
 import org.hubotek.google.xpath.DOMElementExtratorUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -87,7 +87,7 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 					}
 				atomDocument.setEntries(feedEntries);
 			}catch (Exception e){ 
-				throw new TransformationException(e);
+				throw new HubotekException(e);
 			}
 	}
 

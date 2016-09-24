@@ -8,7 +8,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.log4j.Logger;
 import org.hubotek.Builder;
-import org.hubotek.TransformationException;
+import org.hubotek.HubotekException;
 import org.hubotek.google.xpath.DOMElementExtratorUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -35,7 +35,7 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 		rssNewsDocument = new RssDocument();
 	}
 
-	public RssDocumentBuilder withDocument (@NotNull Document document) throws TransformationException
+	public RssDocumentBuilder withDocument (@NotNull Document document) throws HubotekException
 	{ 
 		logger.debug("Starting document tranformation");
 		withBody(document);
@@ -77,7 +77,7 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 				}
 			rssNewsDocument.setRssItems(feedItems);
 		}catch (XPathExpressionException e){ 
-			throw  new TransformationException(e);
+			throw  new HubotekException(e);
 		}
 		return this;
 	}
@@ -109,7 +109,7 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 				rssNewsDocument.setRssImage(rssImage);
 			}
 		}catch (XPathExpressionException e){ 
-			throw  new TransformationException(e);
+			throw  new HubotekException(e);
 		}
 	}
 

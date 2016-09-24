@@ -12,7 +12,7 @@ public class NamedUrl extends BaseUrl{
 	@Column(name="name",insertable=true,updatable=true,length=250)
 	private String name;
 	
-	@Column(name="name",insertable=true,updatable=true,length=4000)
+	@Column(name="description",insertable=true,updatable=true,length=4000)
 	private String description;
 
 	public String getName() {
