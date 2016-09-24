@@ -18,5 +18,4 @@ public class CacheFactorySupplier implements Supplier<CacheFactory>{
 			throw new HubotekException(e);
 		}
 	}
-
 }
