@@ -22,6 +22,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+import com.google.common.io.Files;
+
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("/org/hubotek/tests/controller/google/hubotek-servlet.xml")
