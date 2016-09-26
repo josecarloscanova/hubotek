@@ -15,31 +15,16 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.client.support.HttpAccessor;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 //TODO: Change the name of the class.
-public class HttpRequestAccessor extends HttpAccessor{
-	
-	public Boolean isHttpClient = false;
+public class HttpRequestAccessor extends HttpBaseRequestAccessor<RssDocument>{
 	
 	@Autowired
 	FeedParser feedParser; 
 	
-	public HttpRequestAccessor()
-	{ 
-		super();
-	}
-	
-	public Boolean getIsHttpClient() {
-		return isHttpClient;
-	}
-
-	public void setIsHttpClient(Boolean isHttpClient) {
-		this.isHttpClient = isHttpClient;
-	}
-	
+	@Override
 	public RssDocument doRequest(String location, ResponseCallback callback) 
 	{ 
 		Document rssDocument = null;

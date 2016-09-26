@@ -1,5 +1,6 @@
 package org.hubotek.google.search;
 
+import org.hubotek.ElementEnum;
 
 /**
  * 
@@ -117,7 +118,7 @@ start	unsigned integer
  * @author user
  *
  */
-public enum SearchParameterEnum {
+public enum SearchParameterEnum implements ElementEnum<String>{
 
 	QUERY("q"),
 	C2COFF("c2coff"),
@@ -141,7 +142,8 @@ public enum SearchParameterEnum {
 	IMAGE_DOMINANT_COLOR("imgDominantColor"),
 	SITE_SEARCH_FILTER("siteSearchFilter"),
 	SORT("sort"),
-	KEY("key");
+	KEY("key"),
+	OUTPUT("alt");
 	
 	private String value;
 	
@@ -150,8 +152,9 @@ public enum SearchParameterEnum {
 		this.value = value;
 	}
 	
-	public String withValue()
-	{ 
+	@Override
+	public String valueOf() {
+		// TODO Auto-generated method stub
 		return value;
 	}
 	
