@@ -1,9 +1,11 @@
 package org.hubotek.google.news;
 
 import java.util.concurrent.ExecutionException;
+
+import org.apache.log4j.Logger;
 import org.hubotek.HubotekException;
+import org.hubotek.model.cse.CseSite;
 import org.hubotek.model.rss.RssDocument;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,8 +34,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GoogleRestController  extends FeedParserProvider {
 
+	private static final Logger logger = Logger.getLogger(GoogleRestController.class);
 	
-	@RequestMapping(name="/news",method=RequestMethod.GET)
+	@RequestMapping(value="/news", method=RequestMethod.GET)
 	public RssDocument getGoogleNewsFeed(@RequestParam(value="lang", defaultValue="en_US") String lang , 
 										 @RequestParam(value="num" , defaultValue="5") String count , 
 										 @RequestParam(value="topic" , defaultValue="all") String topic , 
@@ -51,6 +54,16 @@ public class GoogleRestController  extends FeedParserProvider {
 			throw new HubotekException(e);
 		}
 		return document;
+	}
+
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public  CseSite search(@RequestParam (value="query" ,  defaultValue="technology") String query) {
+		if (logger.isDebugEnabled())
+			logger.debug("The Query : " + query);
+		CseSite site = new CseSite();
+		site.setId(System.nanoTime());
+		site.setLocation("Brazil");
+		return site;
 	}
 
 }

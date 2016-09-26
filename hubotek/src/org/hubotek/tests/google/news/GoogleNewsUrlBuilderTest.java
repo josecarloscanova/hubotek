@@ -10,8 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.sun.xml.internal.fastinfoset.Encoder;
-
 import junit.framework.TestCase;
 
 @RunWith(SpringRunner.class)
