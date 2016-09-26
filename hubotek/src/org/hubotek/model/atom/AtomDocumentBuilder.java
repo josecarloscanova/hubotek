@@ -91,6 +91,7 @@ public class AtomDocumentBuilder extends DOMElementExtratorUtil<AtomDocumentElem
 			}
 	}
 
+	@SuppressWarnings("unused")
 	private void withBody(Document document) 
 	{ 
 		String idXPath = "/feed/id"; 

@@ -3,11 +3,9 @@ package org.hubotek.tests.parser;
 import java.io.File;
 import java.io.FileInputStream;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.hubotek.google.news.feed.FeedParser;
-import org.hubotek.model.atom.AtomBody;
 import org.hubotek.model.atom.AtomDocument;
 import org.hubotek.model.atom.AtomDocumentBuilder;
 import org.hubotek.service.database.GoogleCseDAO;
@@ -21,8 +19,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
-import com.google.common.io.Files;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration

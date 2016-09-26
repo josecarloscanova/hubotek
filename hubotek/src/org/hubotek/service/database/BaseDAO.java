@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hubotek.model.cse.GoogleSearchEngineBase;
 import org.hubotek.service.DAO;
 import org.nanotek.Base;
 

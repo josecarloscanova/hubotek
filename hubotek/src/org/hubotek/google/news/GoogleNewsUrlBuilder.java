@@ -71,6 +71,7 @@ public class GoogleNewsUrlBuilder {
 	}
 	
 	//TODO: use the non deprecated method.
+	@SuppressWarnings("deprecation")
 	public GoogleNewsUrlBuilder withCity(String city) {
 		if (notEmpty(city)){
 			put(GoogleNewsUrlParametersEnum.CITY,URLEncoder.encode(city));
