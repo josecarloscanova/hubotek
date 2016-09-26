@@ -4,6 +4,8 @@ import java.util.concurrent.ExecutionException;
 
 import org.apache.log4j.Logger;
 import org.hubotek.HubotekException;
+import org.hubotek.google.news.FeedParserProvider;
+import org.hubotek.google.news.GoogleNewsUrlBuilder;
 import org.hubotek.google.search.GoogleSearchUrlBuilder;
 import org.hubotek.model.cse.CseSite;
 import org.hubotek.model.rss.RssDocument;
