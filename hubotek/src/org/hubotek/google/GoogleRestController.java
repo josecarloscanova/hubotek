@@ -64,6 +64,7 @@ public class GoogleRestController  extends FeedParserProvider {
 		if (logger.isDebugEnabled())
 			logger.debug("The Query : " + query);
 		GoogleSearchUrlBuilder googleSearchUrlBuilder = new GoogleSearchUrlBuilder(); 
+		googleSearchUrlBuilder.withQuery(query).withKey(apiKeyManager.getApiKey(ApiKeyEnum.CUSTOM_SEARCH_KEY));
 		CseSite site = new CseSite();
 		site.setId(System.nanoTime());
 		site.setLocation("Brazil");
