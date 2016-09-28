@@ -12,6 +12,7 @@ import org.hubotek.model.cse.CseSite;
 import org.hubotek.model.project.api.ApiKeyEnum;
 import org.hubotek.model.rss.RssDocument;
 import org.hubotek.service.database.ApiKeyDAO;
+import org.hubotek.service.database.GoogleApiKeyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +46,9 @@ public class GoogleRestController  extends FeedParserProvider {
 	@Autowired
 	private ApiKeyDAO apiKeyDAO;
 	
+	@Autowired 
+	private GoogleApiKeyDAO googleApiKeyDAO;
+	
 	
 	private static final Logger logger = Logger.getLogger(GoogleRestController.class);
 	
@@ -72,11 +76,6 @@ public class GoogleRestController  extends FeedParserProvider {
 	public  AtomDocument search(@RequestParam (value="query" ,  defaultValue="technology") String query) {
 		if (logger.isDebugEnabled())
 			logger.debug("The Query : " + query);
-		GoogleSearchUrlBuilder googleSearchUrlBuilder = new GoogleSearchUrlBuilder(); 
-		googleSearchUrlBuilder.withQuery(query).withKey(apiKeyDAO.findApiKeyByNameType("search", ApiKeyEnum.CUSTOM_SEARCH_KEY).getKey());
-		CseSite site = new CseSite();
-		site.setId(System.nanoTime());
-		site.setLocation("Brazil");
 		return null;
 	}
 

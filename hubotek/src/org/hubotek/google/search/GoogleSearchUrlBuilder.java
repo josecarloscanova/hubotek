@@ -60,7 +60,10 @@ public class GoogleSearchUrlBuilder implements Builder<String>{
 				return t + "&" + u;
 			}}).orElse("");
 		logger.debug("The Query String : " + queryString);
-		return new StringBuilder().append(baseUrlSearch).append("?").append(queryString).toString();
+		StringBuilder sb = new StringBuilder().append(baseUrlSearch);
+		if (!queryString.isEmpty())
+			sb.append("?").append(queryString).toString();
+		return sb.toString();
 	}
 
 	private Stream<String> prepareParameter(SearchParameterEnum sp, Map<SearchParameterEnum, String> parameters) {

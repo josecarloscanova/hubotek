@@ -23,7 +23,7 @@ import org.w3c.dom.NodeList;
  */
 public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElementsEnum> implements Builder<RssDocument>{
 
-	private RssDocument rssNewsDocument; 
+	private RssDocument rssDocument; 
 	private static final Logger logger = Logger.getLogger(RssDocumentBuilder.class);
 
 	public RssDocumentBuilder(){
@@ -32,10 +32,10 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 
 	public void prepare()
 	{ 
-		rssNewsDocument = new RssDocument();
+		rssDocument = new RssDocument();
 	}
 
-	public RssDocumentBuilder withDocument (@NotNull Document document) throws HubotekException
+	public RssDocumentBuilder  withDocument (@NotNull Document document) throws HubotekException
 	{ 
 		logger.debug("Starting document tranformation");
 		withBody(document);
@@ -48,7 +48,7 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 	public RssDocument build()
 	{ 
 		logger.debug("returning document");
-		return rssNewsDocument;
+		return rssDocument;
 	}
 
 	private RssDocumentBuilder withItems(Document document)  {
@@ -75,7 +75,7 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 					RssItem rssItem = new RssItem (title , link , guid,category, pubDate , description);
 					feedItems.add(rssItem);					
 				}
-			rssNewsDocument.setRssItems(feedItems);
+			rssDocument.setRssItems(feedItems);
 		}catch (XPathExpressionException e){ 
 			throw  new HubotekException(e);
 		}
@@ -106,7 +106,7 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 				String imageLink = imageLinkNode.getTextContent();
 
 				RssImage rssImage  = new RssImage(imageTitle , imageUrl , imageLink);
-				rssNewsDocument.setRssImage(rssImage);
+				rssDocument.setRssImage(rssImage);
 			}
 		}catch (XPathExpressionException e){ 
 			throw  new HubotekException(e);
@@ -114,20 +114,20 @@ public class RssDocumentBuilder extends DOMElementExtratorUtil<RssDocumentElemen
 	}
 
 
-	private RssDocumentBuilder withBody(Document rssDocument)
+	private RssDocumentBuilder withBody(Document document)
 	{ 
-		String generator = getFromDocument(rssDocument , RssDocumentElementsEnum.GENERATOR);
-		String title = getFromDocument(rssDocument , RssDocumentElementsEnum.TITLE);
-		String link = getFromDocument(rssDocument , RssDocumentElementsEnum.LINK);
-		String language = getFromDocument(rssDocument , RssDocumentElementsEnum.LANGUAGE);
-		String webMaster = getFromDocument(rssDocument, RssDocumentElementsEnum.WEBMASTER);
-		String copyRight = getFromDocument(rssDocument, RssDocumentElementsEnum.COPYRIGHT);
-		String pubDate = getFromDocument(rssDocument , RssDocumentElementsEnum.PUBDATE);
-		String lastBuildDate = getFromDocument(rssDocument , RssDocumentElementsEnum.LASTBUILDDATE);
+		String generator = getFromDocument(document , RssDocumentElementsEnum.GENERATOR);
+		String title = getFromDocument(document , RssDocumentElementsEnum.TITLE);
+		String link = getFromDocument(document , RssDocumentElementsEnum.LINK);
+		String language = getFromDocument(document , RssDocumentElementsEnum.LANGUAGE);
+		String webMaster = getFromDocument(document, RssDocumentElementsEnum.WEBMASTER);
+		String copyRight = getFromDocument(document, RssDocumentElementsEnum.COPYRIGHT);
+		String pubDate = getFromDocument(document , RssDocumentElementsEnum.PUBDATE);
+		String lastBuildDate = getFromDocument(document , RssDocumentElementsEnum.LASTBUILDDATE);
 
 		RssBody rssBody = new RssBody(generator,  title,  link,  language,  webMaster,  copyRight,
 				pubDate,  lastBuildDate);
-		rssNewsDocument.setRssBody(rssBody);
+		rssDocument.setRssBody(rssBody);
 		return this;
 	}
 

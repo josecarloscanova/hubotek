@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.hubotek.google.news.feed.FeedParser;
+import org.hubotek.google.news.feed.DomStreamParser;
 import org.hubotek.model.atom.AtomDocument;
 import org.hubotek.model.atom.AtomDocumentBuilder;
 import org.hubotek.service.database.GoogleCseDAO;
@@ -28,7 +28,7 @@ public class GoogleAtomParser {
 	DocumentBuilderFactory documentBuilderFactory;
 	
 	@Autowired
-	private FeedParser feedParser;
+	private DomStreamParser feedParser;
 	
 	@Autowired
 	GoogleCseDAO cseDAO;

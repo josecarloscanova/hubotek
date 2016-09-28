@@ -4,7 +4,7 @@ import java.util.concurrent.Future;
 
 import org.springframework.stereotype.Service;
 import org.hubotek.model.rss.RssDocument;
-import org.hubotek.services.HttpRequestAccessor;
+import org.hubotek.services.HttpFeedRequestAccessor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GoogleNewsFeed  {
 	
 	@Autowired
-	private HttpRequestAccessor httpRequestAcessor;
+	private HttpFeedRequestAccessor httpRequestAcessor;
 	
 	public GoogleNewsFeed(){ 
 	}
 
-	public HttpRequestAccessor getHttpRequestAcessor() {
+	public HttpFeedRequestAccessor getHttpRequestAcessor() {
 		return httpRequestAcessor;
 	}
 
-	public void setHttpRequestAcessor(HttpRequestAccessor httpRequestAcessor) {
+	public void setHttpRequestAcessor(HttpFeedRequestAccessor httpRequestAcessor) {
 		this.httpRequestAcessor = httpRequestAcessor;
 	}
 

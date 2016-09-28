@@ -5,9 +5,9 @@ import javax.xml.xpath.XPathFactory;
 
 import org.hubotek.google.cache.CacheFactorySupplier;
 import org.hubotek.google.news.GoogleNewsFeed;
-import org.hubotek.google.news.feed.FeedParser;
+import org.hubotek.google.news.feed.DomStreamParser;
 import org.hubotek.google.xpath.XPathFactorySupplier;
-import org.hubotek.services.HttpRequestAccessor;
+import org.hubotek.services.HttpFeedRequestAccessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -39,16 +39,18 @@ public class Application {
     }
     
     @Bean
-    HttpRequestAccessor createHttpRequestAccessor()
+    HttpFeedRequestAccessor createHttpRequestAccessor()
     { 
-    	return new HttpRequestAccessor();
+    	return new HttpFeedRequestAccessor();
     }
     
     @Bean
-    FeedParser createFeedParser()
+    DomStreamParser createFeedParser()
     { 
-    	return new FeedParser();
+    	return new DomStreamParser();
     }
+    
+    
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
