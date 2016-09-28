@@ -13,6 +13,11 @@
         <class>org.hubotek.model.url.NamedUrl</class>
         <class>org.hubotek.model.project.api.ApiKey</class>
         <class>org.hubotek.model.project.api.GoogleApiKey</class>
+        <class>org.hubotek.model.rss.RssBase</class>
+        <class>org.hubotek.model.rss.RssBody</class>
+        <class>org.hubotek.model.rss.RssDocument</class>
+        <class>org.hubotek.model.rss.RssImage</class>
+        <class>org.hubotek.model.rss.RssItem</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

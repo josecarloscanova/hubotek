@@ -1,9 +1,20 @@
 package org.hubotek.model.rss;
 
-public class RssImage
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+//TODO: refactor this class to use the namedurl attribute on url and link.
+@SuppressWarnings("serial")
+@Entity
+@Table(name="rss_image")
+public class RssImage extends RssBase
 {
+	@Column(name="title" , length=255 , insertable=true , updatable=true)
 	private String title; 
+	@Column(name="url" , length=1000 , insertable=true , updatable=true)
 	private String url; 
+	@Column(name="link" , length=1000 , insertable=true , updatable=true)
 	private String link; 
 	
 	public RssImage(){}

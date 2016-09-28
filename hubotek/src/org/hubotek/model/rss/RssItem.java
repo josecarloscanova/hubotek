@@ -1,13 +1,26 @@
 package org.hubotek.model.rss;
 
-public class RssItem
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name="rss_item")
+public class RssItem extends RssBase
 { 
 
+	@Column(name="title" , length=255 , insertable=true, updatable=false)
 	private String title; 
+	@Column(name="link" , length=1000 , insertable=true, updatable=false)
 	private String link; 
+	@Column(name="guid" , length=80 , insertable=true, updatable=false)
 	private String guid; 
+	@Column(name="category" , length=255 , insertable=true, updatable=false)
 	private String category;
+	@Column(name="pub_date" , length=55 , insertable=true, updatable=false)
 	private String pubDate;
+	@Column(name="description" , length=2000 , insertable=true, updatable=false)
 	private String description;
 	
 	public RssItem(){}

@@ -1,14 +1,33 @@
 package org.hubotek.model.rss;
 
-public class RssBody 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+//This is not the best practice use a standard format to persist the content, 
+//but need to think that what is important is that the message remains cached and could be located and transformed to other format 
+//at any time. And ATOM , RSS and JSON Search Result differs on structure.
+//TODO: Change name to RssHeader
+@SuppressWarnings("serial")
+@Entity
+@Table(name="rss_body")
+public class RssBody  extends RssBase
 { 
+	
+	@Column(name="generator" , length=40 , insertable=true , updatable=false)
 	private String generator;
+	@Column(name="title" , length=255 , insertable=true , updatable=false)
 	private String title;
+	@Column(name="link" , length=1000 , insertable=true , updatable=false)
 	private String link;
+	@Column(name="language" , length=20 , insertable=true , updatable=false)
 	private String language; 
+	@Column(name="webmaster" , length=255 , insertable=true , updatable=false)
 	private String webMaster; 
+	@Column(name="copyright" , length=255 , insertable=true , updatable=false)
 	private String copyright;
+	@Column(name="pub_date" , length=55 , insertable=true , updatable=false)
 	private String pubDate; 
+	@Column(name="last_build_date" , length=55 , insertable=true , updatable=false)
 	private String lastBuildDate; 
 
 	public RssBody(){}
