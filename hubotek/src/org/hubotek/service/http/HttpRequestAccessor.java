@@ -1,4 +1,4 @@
-package org.hubotek.services;
+package org.hubotek.service.http;
 
 import java.net.URI;
 

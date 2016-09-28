@@ -7,7 +7,7 @@ import org.hubotek.google.cache.CacheFactorySupplier;
 import org.hubotek.google.news.GoogleNewsFeed;
 import org.hubotek.google.news.feed.DomParser;
 import org.hubotek.google.xpath.XPathFactorySupplier;
-import org.hubotek.services.HttpRequestAccessor;
+import org.hubotek.service.http.HttpRequestAccessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
