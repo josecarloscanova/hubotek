@@ -11,6 +11,8 @@
         <class>org.hubotek.model.cse.GoogleSearchEngineBase</class>
         <class>org.hubotek.model.url.BaseUrl</class>
         <class>org.hubotek.model.url.NamedUrl</class>
+        <class>org.hubotek.model.project.api.ApiKey</class>
+        <class>org.hubotek.model.project.api.GoogleApiKey</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

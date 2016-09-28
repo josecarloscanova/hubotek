@@ -7,8 +7,10 @@ import javax.persistence.PersistenceContext;
 
 import org.hubotek.service.DAO;
 import org.nanotek.Base;
+import org.springframework.stereotype.Service;
 
 
+@Service
 public class BaseDAO <K extends Serializable , T extends Base<K>> implements DAO<T>{
 
 	@PersistenceContext 

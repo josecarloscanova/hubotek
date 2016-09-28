@@ -35,9 +35,9 @@ public class GoogleRestControllerTest {
     }
     
 	@Test
-	public void test() {
+	public void testNewsEndPoint() {
 		try {
-			 MockHttpServletResponse ra = mockMvc.perform(get("/googleNews").param(GoogleNewsUrlParametersEnum.CODE.getUrlParameter(), "en").param("cf", "all").param("pz" , "1").param("topic" , "tc").param("output", "rss").param("siidp", "3181f56d83fa79d45987ac941b28f6d0e885").param("key", "AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ").param("ict","ln").accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+			 MockHttpServletResponse ra = mockMvc.perform(get("/news").param(GoogleNewsUrlParametersEnum.CODE.getUrlParameter(), "en").param("cf", "all").param("pz" , "1").param("topic" , "tc").param("output", "rss").param("siidp", "3181f56d83fa79d45987ac941b28f6d0e885").param("key", "AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ").param("ict","ln").accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
 			 System.out.println(new String(ra.getContentAsByteArray()));
 		} catch (Exception e) {
 			throw new TestException(e);
@@ -45,9 +45,9 @@ public class GoogleRestControllerTest {
 	}
 
 	@Test
-	public void testUrlConformation() {
+	public void testSearchEndPoint() {
 		try {
-			 MockHttpServletResponse ra = mockMvc.perform(get("/googleNews").param(GoogleNewsUrlParametersEnum.CODE.getUrlParameter(), "en").param("cf", "all").param("pz" , "1").param("topic" , "tc").param("output", "rss").param("siidp", "3181f56d83fa79d45987ac941b28f6d0e885").param("key", "AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ").param("ict","ln").accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+			 MockHttpServletResponse ra = mockMvc.perform(get("/search").param(GoogleNewsUrlParametersEnum.CODE.getUrlParameter(), "en").param("cf", "all").param("pz" , "1").param("topic" , "tc").param("output", "rss").param("siidp", "3181f56d83fa79d45987ac941b28f6d0e885").param("key", "AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ").param("ict","ln").accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
 			 System.out.println(new String(ra.getContentAsByteArray()));
 		} catch (Exception e) {
 			throw new TestException(e);

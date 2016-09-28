@@ -1,4 +1,4 @@
-package org.hubotek.model.cse;
+package org.hubotek.model.project.api;
 
 public enum ApiKeyEnum {
 

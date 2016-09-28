@@ -18,6 +18,7 @@ import junit.framework.TestCase;
 @ContextConfiguration("/org/hubotek/tests/controller/google/hubotek-servlet.xml")
 public class CustomSearchAdapterTest extends TestCase{
 
+	@Deprecated
 	@Test
 	public void testQueryStringBuildingOutput()
 	{ 
@@ -26,7 +27,6 @@ public class CustomSearchAdapterTest extends TestCase{
 		parameters.put(SearchParameterEnum.QUERY, "spring+framework");
 		parameters.put(SearchParameterEnum.OUTPUT, "atom");
 		parameters.put(SearchParameterEnum.USER_LANGUAGE, "en");
-		csa.searchGoogle(parameters);
 	}
 	
 }
