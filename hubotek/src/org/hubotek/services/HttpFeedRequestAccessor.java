@@ -3,7 +3,7 @@ package org.hubotek.services;
 import java.net.URI;
 
 import org.hubotek.HubotekException;
-import org.hubotek.google.news.feed.DomStreamParser;
+import org.hubotek.google.news.feed.DomParser;
 import org.hubotek.http.ResponseCallback;
 import org.hubotek.model.rss.RssDocument;
 import org.hubotek.model.rss.RssDocumentBuilder;
@@ -19,7 +19,7 @@ import org.xml.sax.InputSource;
 public class HttpFeedRequestAccessor extends HttpRequestAccessor<RssDocument>{
 	
 	@Autowired
-	DomStreamParser feedParser; 
+	DomParser feedParser; 
 	
 	@Override
 	public  RssDocument doRequest(String location, ResponseCallback callback)

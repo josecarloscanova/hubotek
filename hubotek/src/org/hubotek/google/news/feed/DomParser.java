@@ -7,11 +7,11 @@ import org.hubotek.HubotekException;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-public class DomStreamParser {
+public class DomParser {
 
 	DocumentBuilderFactory documentBuilderFactory;
 	
-	public DomStreamParser(){
+	public DomParser(){
 		prepare();
 	}
 

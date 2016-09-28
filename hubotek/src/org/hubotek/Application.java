@@ -5,7 +5,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.hubotek.google.cache.CacheFactorySupplier;
 import org.hubotek.google.news.GoogleNewsFeed;
-import org.hubotek.google.news.feed.DomStreamParser;
+import org.hubotek.google.news.feed.DomParser;
 import org.hubotek.google.xpath.XPathFactorySupplier;
 import org.hubotek.services.HttpFeedRequestAccessor;
 import org.springframework.context.annotation.Bean;
@@ -45,9 +45,9 @@ public class Application {
     }
     
     @Bean
-    DomStreamParser createFeedParser()
+    DomParser createFeedParser()
     { 
-    	return new DomStreamParser();
+    	return new DomParser();
     }
     
     
