@@ -42,14 +42,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GoogleRestController  extends FeedParserProvider {
 
-	
-	@Autowired
-	private ApiKeyDAO apiKeyDAO;
-	
-	@Autowired 
-	private GoogleApiKeyDAO googleApiKeyDAO;
-	
-	
 	private static final Logger logger = Logger.getLogger(GoogleRestController.class);
 	
 	@RequestMapping(value="/news", method=RequestMethod.GET)
