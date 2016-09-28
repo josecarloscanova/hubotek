@@ -40,7 +40,7 @@ public class Application {
     }
     
     @Bean
-    <T extends HubDocument> HttpRequestAccessor<T> createHttpRequestAccessor()
+    HttpRequestAccessor createHttpRequestAccessor()
     { 
     	return new HttpRequestAccessor();
     }
