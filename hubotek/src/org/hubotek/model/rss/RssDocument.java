@@ -12,9 +12,13 @@ public class RssDocument implements HubDocument{
 	private List<RssItem> rssItems; 
 	
 	public RssDocument(){
-		rssItems = new ArrayList<RssItem>();
+		prepare();
 	}
 	
+	private void prepare() {
+		rssItems = new ArrayList<RssItem>();		
+	}
+
 	public RssDocument(RssBody body,RssImage image,List<RssItem>items)
 	{ 
 		this.rssBody = body; 
