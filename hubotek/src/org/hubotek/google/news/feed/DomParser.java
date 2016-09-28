@@ -19,7 +19,7 @@ public class DomParser {
 			documentBuilderFactory = DocumentBuilderFactory.newInstance();
 	}
 	
-	public Document parseFeed (InputSource inputSource)
+	public Document parseInput (InputSource inputSource)
 	{
 		try {
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();

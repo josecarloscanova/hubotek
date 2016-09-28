@@ -32,7 +32,7 @@ public class HttpFeedRequestAccessor extends HttpRequestAccessor<RssDocument>{
 				ClientHttpResponse response = request.execute();
 				if (response.getStatusCode() == HttpStatus.OK)
 				{ 
-					rssDocument = feedParser.parseFeed(new InputSource(response.getBody()));
+					rssDocument = feedParser.parseInput(new InputSource(response.getBody()));
 					hubDocument = new RssDocumentBuilder().withDocument(rssDocument).build();
 				}
 		}catch (Exception ex)
