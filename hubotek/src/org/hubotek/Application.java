@@ -39,12 +39,6 @@ public class Application {
     }
     
     @Bean
-    HttpRequestAccessor createHttpRequestAccessor()
-    { 
-    	return new HttpRequestAccessor();
-    }
-    
-    @Bean
     DomParser createFeedParser()
     { 
     	return new DomParser();

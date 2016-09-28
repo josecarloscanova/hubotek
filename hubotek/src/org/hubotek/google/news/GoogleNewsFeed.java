@@ -2,12 +2,13 @@ package org.hubotek.google.news;
 
 import java.util.concurrent.Future;
 
-import org.springframework.stereotype.Service;
 import org.hubotek.model.rss.RssDocument;
-import org.hubotek.services.HttpFeedRequestAccessor;
+import org.hubotek.model.rss.RssDocumentBuilder;
+import org.hubotek.services.HttpRequestAccessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 //Still on design...
@@ -15,16 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GoogleNewsFeed  {
 	
 	@Autowired
-	private HttpFeedRequestAccessor httpRequestAcessor;
+	private HttpRequestAccessor httpRequestAcessor;
 	
 	public GoogleNewsFeed(){ 
 	}
 
-	public HttpFeedRequestAccessor getHttpRequestAcessor() {
+	public HttpRequestAccessor getHttpRequestAcessor() {
 		return httpRequestAcessor;
 	}
 
-	public void setHttpRequestAcessor(HttpFeedRequestAccessor httpRequestAcessor) {
+	public void setHttpRequestAcessor(HttpRequestAccessor httpRequestAcessor) {
 		this.httpRequestAcessor = httpRequestAcessor;
 	}
 
@@ -32,7 +33,7 @@ public class GoogleNewsFeed  {
 	public Future<RssDocument> requestNewsFeed(String url)
 	{ 
 		String baseUrl = url !=null ? url : "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&output=rss";
-		return new AsyncResult<RssDocument>(httpRequestAcessor.doRequest(baseUrl , null));
+		return new AsyncResult<RssDocument>(new RssDocumentBuilder().withDocument(httpRequestAcessor.doRequest(baseUrl , null)).build());
 	}
 
 }
