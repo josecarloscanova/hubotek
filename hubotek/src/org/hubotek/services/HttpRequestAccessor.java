@@ -15,7 +15,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 @Service
-public abstract class HttpRequestAccessor <T> extends HttpAccessor{
+public class HttpRequestAccessor <T> extends HttpAccessor{
 
 	public Boolean isHttpClient = false;
 	
