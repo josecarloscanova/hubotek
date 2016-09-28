@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
 
 
 //Still on design...
@@ -33,7 +34,9 @@ public class GoogleNewsFeed  {
 	public Future<RssDocument> requestNewsFeed(String url)
 	{ 
 		String baseUrl = url !=null ? url : "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&output=rss";
-		return new AsyncResult<RssDocument>(new RssDocumentBuilder().withDocument(httpRequestAcessor.doRequest(baseUrl , null)).build());
+		Document webDocument = httpRequestAcessor.doRequest(baseUrl , null);
+		RssDocument rssDocument = new RssDocumentBuilder().withDocument(webDocument).build();
+		return new AsyncResult<RssDocument>(rssDocument);
 	}
 
 }
