@@ -3,9 +3,9 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
 			 http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd">
-
-    <persistence-unit name="hubotek-jetty" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <persistence-unit name="hubotek-jetty" transaction-type="JTA">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <jta-data-source>java:/hubotek</jta-data-source>
         <class>org.hubotek.model.cse.CseBase</class>
         <class>org.hubotek.model.cse.CseSite</class>
         <class>org.hubotek.model.cse.GoogleSearchEngineBase</class>
@@ -23,11 +23,6 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:postgresql://127.0.0.1:5432/hubotek_db" />
-			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="postgresql123" />
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
         </properties>
     </persistence-unit>
 </persistence>
